@@ -1,0 +1,1 @@
+ALTER TABLE `auth_user` DROP COLUMN `github_username`;
