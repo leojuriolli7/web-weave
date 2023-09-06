@@ -13,11 +13,18 @@
 	export let type: HTMLButtonAttributes['type'] = 'button';
 	export let variant: Variant = 'primary';
 	export let size: Size = 'base';
+
+	const spinnerColors: Record<Variant, string> = {
+		brand: 'var(--white)',
+		danger: 'var(--error-text)',
+		primary: 'var(--black)',
+		secondary: 'var(--white)'
+	};
 </script>
 
 <button class="{variant} {size}" {style} class:full class:loading on:click {disabled} {type}>
 	{#if loading}
-		<Spinner size={16} />
+		<Spinner size={16} color={spinnerColors[variant]} />
 	{/if}
 
 	<slot />
@@ -89,6 +96,6 @@
 
 	.danger {
 		background: var(--error);
-		color: #fecaca;
+		color: var(--error-text);
 	}
 </style>

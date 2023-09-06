@@ -10,12 +10,9 @@
 	--black: #000;
 	--border: rgba(255, 255, 255, 0.15);
 	--error: #ec3334;
+	--error-text: #fecaca;
 	--warning: #e7a917;
 	--success: #1db954;
-}
-
-a {
-	color: var(--brand);
 }
 
 body {

@@ -21,6 +21,7 @@
 
 <form
 	method="POST"
+	style:width="100%"
 	action={isCreate ? '?/createLink' : '?/editLink'}
 	use:enhance={() => {
 		loading = true;
@@ -61,7 +62,48 @@
 		defaultValue={defaultValues?.title}
 	/>
 
-	<Button {loading} full variant="brand" type="submit" style="margin-top: 16px">
-		{isCreate ? 'Create new link' : 'Update link'}
-	</Button>
+	<div class="buttons">
+		{#if mode === 'edit'}
+			<a data-sveltekit-noscroll data-sveltekit-replacestate href="/dashboard">
+				<Button disabled={loading} variant="danger" full type="button">Cancel</Button>
+			</a>
+		{/if}
+
+		<Button {loading} variant="primary" type="submit">
+			{isCreate ? 'Create new link' : 'Update link'}
+		</Button>
+	</div>
 </form>
+
+<style lang="scss">
+	.buttons {
+		display: flex;
+		gap: 10px;
+		align-items: center;
+		margin-top: 16px;
+
+		a {
+			width: 50%;
+			text-decoration: none;
+		}
+
+		:global(button[type='submit']:nth-child(2)) {
+			width: 50%;
+		}
+
+		@media (max-width: 400px) {
+			flex-direction: column-reverse;
+			:global(button[type='submit']:nth-child(2)) {
+				width: 100%;
+			}
+
+			a {
+				width: 100%;
+			}
+		}
+
+		:global(button[type='submit']:first-child) {
+			width: 100%;
+		}
+	}
+</style>

@@ -3,14 +3,17 @@
 
 	export let link: Link;
 	export let loading = false;
+	export let showLink = true;
 </script>
 
 <div class:loading class="user-link-content">
-	<slot>
+	{#if showLink}
 		<a class="user-link" href={link.url}>
 			{link.title}
 		</a>
-	</slot>
+	{:else}
+		<slot name="alternate" />
+	{/if}
 
 	{#if $$slots.right}
 		<div class="right-container">
@@ -35,6 +38,11 @@
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
+		gap: 12px;
+
+		@media (max-width: 600px) {
+			padding: 12px 24px;
+		}
 
 		&.loading {
 			opacity: 50%;

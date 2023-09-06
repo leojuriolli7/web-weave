@@ -49,7 +49,7 @@
 		border: 1px solid var(--border);
 		border-radius: 10px;
 		font-size: 16px;
-		color: var(--light-gray);
+		color: var(--white);
 		margin-top: 6px;
 
 		&::placeholder {

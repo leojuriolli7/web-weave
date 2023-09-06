@@ -34,6 +34,11 @@
 		margin: 0 auto;
 	}
 
+	a {
+		text-decoration: underline;
+		color: var(--brand);
+	}
+
 	header {
 		height: 64px;
 		padding: 16px;
