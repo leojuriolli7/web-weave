@@ -44,4 +44,11 @@
 		height: 96px;
 		border-radius: 50%;
 	}
+
+	nav {
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+		margin-top: 16px;
+	}
 </style>

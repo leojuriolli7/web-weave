@@ -1,7 +1,7 @@
 import { links as linksTable } from '$drizzle/schema';
 import { tursoClient } from '$lib/server/db';
 import { fail, redirect } from '@sveltejs/kit';
-import { createLinkSchema } from './dashboard.schema';
+import { createLinkSchema, deleteLinkSchema } from './dashboard.schema';
 import { eq } from 'drizzle-orm';
 
 function getFirstMessages(
@@ -62,5 +62,19 @@ export const actions = {
 			title,
 			url
 		});
+	},
+	deleteLink: async ({ request, locals }) => {
+		const session = await locals.auth.validate();
+
+		if (!session) throw redirect(302, '/');
+
+		const form = Object.fromEntries(await request.formData());
+		const input = deleteLinkSchema.safeParse(form);
+
+		if (input.success) {
+			const { id } = input.data;
+
+			await tursoClient.delete(linksTable).where(eq(linksTable.id, id));
+		}
 	}
 };
