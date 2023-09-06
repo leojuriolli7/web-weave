@@ -1,4 +1,4 @@
-import { auth, githubAuth } from '$lib/server/lucia.js';
+import { auth, githubAuth } from '$lib/server/lucia';
 import { OAuthRequestError } from '@lucia-auth/oauth';
 
 // github redirects back here

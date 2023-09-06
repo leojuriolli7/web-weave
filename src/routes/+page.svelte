@@ -1,11 +1,8 @@
-<script lang="ts">
-	import { enhance } from '$app/forms';
+<h1>Web Weave</h1>
 
-	export let data;
-</script>
-
-<h1>Profile</h1>
-<p>{data.user.username}</p>
-<form method="post" action="?/logout" use:enhance>
-	<input type="submit" value="Sign out" />
-</form>
+<style>
+	h1 {
+		color: var(--silver);
+		margin-top: 16px;
+	}
+</style>

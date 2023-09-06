@@ -5,6 +5,15 @@ CREATE TABLE `auth_key` (
 	FOREIGN KEY (`user_id`) REFERENCES `auth_user`(`id`) ON UPDATE no action ON DELETE no action
 );
 --> statement-breakpoint
+CREATE TABLE `user_links` (
+	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
+	`title` text NOT NULL,
+	`image` text,
+	`url` text NOT NULL,
+	`user_id` text(15) NOT NULL,
+	FOREIGN KEY (`user_id`) REFERENCES `auth_user`(`id`) ON UPDATE no action ON DELETE no action
+);
+--> statement-breakpoint
 CREATE TABLE `user_session` (
 	`id` text(128) PRIMARY KEY NOT NULL,
 	`user_id` text(15) NOT NULL,
@@ -16,6 +25,8 @@ CREATE TABLE `user_session` (
 CREATE TABLE `auth_user` (
 	`id` text(15) PRIMARY KEY NOT NULL,
 	`username` text(55),
-	`names` text(255),
-	`last_names` text(255)
+	`email` text,
+	`avatar` text
 );
+--> statement-breakpoint
+CREATE UNIQUE INDEX `auth_user_username_unique` ON `auth_user` (`username`);
