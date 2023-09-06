@@ -6,9 +6,11 @@
 </script>
 
 <div class:loading class="user-link-content">
-	<a class="user-link" href={link.url}>
-		{link.title}
-	</a>
+	<slot>
+		<a class="user-link" href={link.url}>
+			{link.title}
+		</a>
+	</slot>
 
 	{#if $$slots.right}
 		<div class="right-container">

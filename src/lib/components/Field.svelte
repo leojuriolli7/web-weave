@@ -5,20 +5,22 @@
 		message: string;
 	};
 
+	export let defaultValue: string | null = null;
 	export let name: string;
 	export let label: string;
 	export let placeholder: string;
 	export let style: string | undefined = undefined;
+	const id = (Math.random() * 10e15).toString(16);
 
 	$: error = $page.form?.errors?.[name] as Error | undefined;
 </script>
 
 <div {style}>
-	<label for={name}> {label} </label>
+	<label for={id}> {label} </label>
 	{#if error}
 		<p class="error-message">{error?.message}</p>
 	{/if}
-	<input {placeholder} id={name} {name} />
+	<input value={defaultValue} {placeholder} {id} {name} />
 </div>
 
 <style lang="scss">

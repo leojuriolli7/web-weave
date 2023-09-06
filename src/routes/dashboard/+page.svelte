@@ -1,12 +1,17 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import { invalidate } from '$app/navigation';
-	import { Button, Field, Link } from '$components';
-	import { Trash2 } from 'lucide-svelte';
+	import { page } from '$app/stores';
+	import { Link } from '$components';
+	import { Pencil, Trash2, X as CloseIcon } from 'lucide-svelte';
+	import UpsertLinkForm from './UpsertLinkForm.svelte';
 
 	export let data;
 	let creatingLink = false;
 	let deletingLinks: number[] = [];
+	let editingLinks: number[] = [];
+
+	$: editParam = $page.url.searchParams.get('edit');
 </script>
 
 <div class="outer-container">
@@ -15,12 +20,33 @@
 
 		<nav>
 			{#each data.links as link (link.id)}
-				<Link loading={deletingLinks?.some((value) => value === link.id)} {link}>
+				{@const isEditing = editParam && Number(editParam) === link.id}
+				{@const loadingDelete = deletingLinks?.some((value) => value === link.id)}
+				{@const loadingEdit = editingLinks?.some((value) => value === link.id)}
+				{@const loading = loadingDelete || loadingEdit}
+				<Link {loading} {link}>
+					{#if isEditing}
+						<UpsertLinkForm
+							loading={creatingLink}
+							mode="edit"
+							defaultValues={{
+								id: link.id,
+								title: link.title,
+								url: link.url
+							}}
+						/>
+					{:else}
+						<a class="user-link" href={link.url}>
+							{link.title}
+						</a>
+					{/if}
+
 					<div class="link-actions" slot="right">
 						<form
 							method="POST"
 							action="?/deleteLink"
 							title="Delete this link"
+							class="delete-form"
 							use:enhance={() => {
 								deletingLinks = [...deletingLinks, link.id];
 
@@ -37,10 +63,31 @@
 							}}
 						>
 							<input name="id" value={link.id} style:display="none" style:visibility="hidden" />
-							<button type="submit">
+							<button
+								style:background="none"
+								style:border="none"
+								class="action-icon-container"
+								type="submit"
+								disabled={loading}
+							>
 								<Trash2 style="cursor:pointer" size={21} color="var(--white)" />
 							</button>
 						</form>
+
+						<a
+							class="action-icon-container"
+							href={isEditing ? '/dashboard' : `?edit=${link.id}`}
+							title={isEditing ? 'Stop editing this link' : 'Edit this link'}
+							data-sveltekit-noscroll
+							data-sveltekit-replacestate
+							class:loading
+						>
+							{#if isEditing}
+								<CloseIcon style="cursor:pointer" size={20} color="var(--white)" />
+							{:else}
+								<Pencil style="cursor:pointer" size={20} color="var(--white)" />
+							{/if}
+						</a>
 					</div>
 				</Link>
 			{/each}
@@ -48,42 +95,8 @@
 	</section>
 
 	<section class="create-link-container">
-		<h2>Create a new link</h2>
-		<form
-			method="POST"
-			action="?/createLink"
-			use:enhance={() => {
-				creatingLink = true;
-
-				return ({ update, result }) => {
-					creatingLink = false;
-					update();
-
-					if (result.type === 'success') {
-						// update the links list
-						invalidate('app:your-links');
-					}
-				};
-			}}
-		>
-			<Field
-				label="Your link URL"
-				placeholder="Write a url..."
-				name="url"
-				style="margin-top: 16px"
-			/>
-
-			<Field
-				label="Your link title"
-				placeholder="Write a title..."
-				name="title"
-				style="margin-top: 16px"
-			/>
-
-			<Button loading={creatingLink} full variant="brand" type="submit" style="margin-top: 16px"
-				>Create new link</Button
-			>
-		</form>
+		<h2 style:margin-bottom="16px">Create a new link</h2>
+		<UpsertLinkForm loading={creatingLink} mode="create" />
 	</section>
 </div>
 
@@ -97,25 +110,36 @@
 
 	.create-link-container {
 		width: 300px;
-		margin-top: 32px;
+
+		@media (max-width: 1200px) {
+			margin-top: 32px;
+		}
 	}
 
 	.link-actions {
 		display: flex;
 		align-items: center;
 		gap: 12px;
+	}
 
-		form {
-			button {
-				background: none;
-				border: none;
-				display: flex;
-			}
-		}
+	.action-icon-container {
+		display: flex;
 	}
 
 	.outer-container {
-		padding: 16px;
+		padding: 32px;
+		max-width: 1200px;
+		margin: 0 auto;
+		display: flex;
+		gap: 32px;
+
+		@media (max-width: 1200px) {
+			display: block;
+		}
+	}
+
+	section {
+		flex: 50%;
 	}
 
 	nav {
@@ -123,5 +147,11 @@
 		flex-direction: column;
 		gap: 16px;
 		margin-top: 16px;
+	}
+
+	.user-link {
+		color: var(--white);
+		text-decoration: none;
+		width: 100%;
 	}
 </style>

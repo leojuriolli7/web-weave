@@ -1,8 +1,9 @@
 import { links as linksTable } from '$drizzle/schema';
 import { tursoClient } from '$lib/server/db';
 import { fail, redirect } from '@sveltejs/kit';
-import { createLinkSchema, deleteLinkSchema } from './dashboard.schema';
+import { createLinkSchema, deleteLinkSchema, editLinkSchema } from './dashboard.schema';
 import { eq } from 'drizzle-orm';
+import type { ZodError } from 'zod';
 
 function getFirstMessages(
 	arr: { field: string | number; message: string }[]
@@ -16,6 +17,17 @@ function getFirstMessages(
 	}
 
 	return resultMap;
+}
+
+function parseZodErrors(formErrors: ZodError) {
+	const formattedErrors = formErrors.errors.map((error) => {
+		return {
+			field: error.path[0],
+			message: error.message
+		};
+	});
+
+	return getFirstMessages(formattedErrors);
 }
 
 export const load = async ({ locals, depends }) => {
@@ -42,17 +54,9 @@ export const actions = {
 		const input = createLinkSchema.safeParse(form);
 
 		if (!input.success) {
-			// Loop through the errors array and create a custom errors array
-			const errors = input.error.errors.map((error) => {
-				return {
-					field: error.path[0],
-					message: error.message
-				};
-			});
+			const errors = parseZodErrors(input.error);
 
-			const parsedErrors = getFirstMessages(errors);
-
-			return fail(400, { error: true, errors: parsedErrors });
+			return fail(400, { error: true, errors });
 		}
 
 		const { title, url } = input.data;
@@ -62,6 +66,29 @@ export const actions = {
 			title,
 			url
 		});
+	},
+	editLink: async ({ request, locals }) => {
+		const session = await locals.auth.validate();
+
+		if (!session) throw redirect(302, '/');
+
+		const form = Object.fromEntries(await request.formData());
+		const input = editLinkSchema.safeParse(form);
+
+		if (!input.success) {
+			const errors = parseZodErrors(input.error);
+
+			return fail(400, { error: true, errors });
+		}
+
+		const { id, newTitle, newUrl } = input.data;
+
+		await tursoClient
+			.update(linksTable)
+			.set({ title: newTitle, url: newUrl })
+			.where(eq(linksTable.id, id));
+
+		throw redirect(301, '/dashboard');
 	},
 	deleteLink: async ({ request, locals }) => {
 		const session = await locals.auth.validate();
