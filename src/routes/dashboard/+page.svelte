@@ -1,9 +1,7 @@
 <script>
 	import { enhance } from '$app/forms';
 	import { invalidate } from '$app/navigation';
-	import Button from '$lib/components/Button.svelte';
-	import Field from '$lib/components/Field.svelte';
-	import Link from '$lib/components/Link.svelte';
+	import { Button, Field, Link } from '$components';
 
 	export let data;
 	let loading = false;

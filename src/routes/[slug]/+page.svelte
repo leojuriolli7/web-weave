@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Link from '$lib/components/Link.svelte';
+	import Link from '$components/Link.svelte';
 
 	export let data;
 	let { user } = data;

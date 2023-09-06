@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	import Button from '$lib/components/Button.svelte';
+	import Button from '$components/Button.svelte';
 	import '../app.css';
 
 	export let data;
