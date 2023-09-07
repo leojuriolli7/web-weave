@@ -8,6 +8,11 @@
 	$: user = data.session.user;
 </script>
 
+<svelte:head>
+	<title>Web Weave</title>
+	<meta name="description" content="Streamline your online presence." />
+</svelte:head>
+
 <main>
 	<header>
 		{#if data.session.isLoggedIn === true}

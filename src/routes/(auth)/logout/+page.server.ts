@@ -1,5 +1,5 @@
 import { auth } from '$lib/server/lucia';
-import { fail, redirect } from '@sveltejs/kit';
+import { fail } from '@sveltejs/kit';
 
 export const actions = {
 	default: async ({ locals }) => {
@@ -10,7 +10,5 @@ export const actions = {
 
 		// remove cookies
 		locals.auth.setSession(null);
-
-		throw redirect(302, '/');
 	}
 };

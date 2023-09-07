@@ -88,7 +88,7 @@ export const actions = {
 			.set({ title: newTitle, url: newUrl })
 			.where(eq(linksTable.id, id));
 
-		throw redirect(301, '/dashboard');
+		throw redirect(302, '/dashboard');
 	},
 	deleteLink: async ({ request, locals }) => {
 		const session = await locals.auth.validate();

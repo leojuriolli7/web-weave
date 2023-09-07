@@ -4,6 +4,8 @@
 	import { page } from '$app/stores';
 	import { Link } from '$components';
 	import { Pencil, Trash2, X as CloseIcon } from 'lucide-svelte';
+	import { flip } from 'svelte/animate';
+	import { slide } from 'svelte/transition';
 	import UpsertLinkForm from './UpsertLinkForm.svelte';
 
 	export let data;
@@ -18,7 +20,7 @@
 	<section>
 		<h2>Your created links</h2>
 
-		<nav>
+		<ul>
 			{#each data.links as link (link.id)}
 				{@const isEditing = editParam && Number(editParam) === link.id}
 				{@const loadingDelete = deletingLinks?.some((value) => value === link.id)}
@@ -26,71 +28,73 @@
 				{@const loading = loadingDelete || loadingEdit}
 				{@const canShowActions = !loading && !isEditing}
 
-				<Link {loading} {link} showLink={!isEditing}>
-					<UpsertLinkForm
-						slot="alternate"
-						loading={creatingLink}
-						mode="edit"
-						defaultValues={{
-							id: link.id,
-							title: link.title,
-							url: link.url
-						}}
-					/>
+				<li animate:flip={{ duration: 300 }} transition:slide>
+					<Link {loading} {link} showLink={!isEditing}>
+						<UpsertLinkForm
+							slot="alternate"
+							loading={creatingLink}
+							mode="edit"
+							defaultValues={{
+								id: link.id,
+								title: link.title,
+								url: link.url
+							}}
+						/>
 
-					<div class="link-actions" slot="right">
-						{#if canShowActions}
-							<form
-								method="POST"
-								action="?/deleteLink"
-								title="Delete this link"
-								class="delete-form"
-								use:enhance={() => {
-									deletingLinks = [...deletingLinks, link.id];
+						<div class="link-actions" slot="right">
+							{#if canShowActions}
+								<form
+									method="POST"
+									action="?/deleteLink"
+									title="Delete this link"
+									class="delete-form"
+									use:enhance={() => {
+										deletingLinks = [...deletingLinks, link.id];
 
-									return ({ update, result }) => {
-										update();
+										return ({ update, result }) => {
+											update();
 
-										deletingLinks = deletingLinks?.filter((val) => val !== link.id);
+											deletingLinks = deletingLinks?.filter((val) => val !== link.id);
 
-										if (result.type === 'success') {
-											// update the links list
-											invalidate('app:your-links');
-										}
-									};
-								}}
-							>
-								<input name="id" value={link.id} style:display="none" style:visibility="hidden" />
-								<button
-									style:background="none"
-									style:border="none"
-									class="action-icon-container"
-									type="submit"
-									disabled={loading}
+											if (result.type === 'success') {
+												// update the links list
+												invalidate('app:your-links');
+											}
+										};
+									}}
 								>
-									<Trash2 style="cursor:pointer" size={21} color="var(--white)" />
-								</button>
-							</form>
+									<input name="id" value={link.id} style:display="none" style:visibility="hidden" />
+									<button
+										style:background="none"
+										style:border="none"
+										class="action-icon-container"
+										type="submit"
+										disabled={loading}
+									>
+										<Trash2 style="cursor:pointer" size={21} color="var(--white)" />
+									</button>
+								</form>
 
-							<a
-								class="action-icon-container"
-								href={isEditing ? '/dashboard' : `?edit=${link.id}`}
-								title={isEditing ? 'Stop editing this link' : 'Edit this link'}
-								data-sveltekit-noscroll
-								data-sveltekit-replacestate
-								class:loading
-							>
-								{#if isEditing}
-									<CloseIcon style="cursor:pointer" size={20} color="var(--white)" />
-								{:else}
-									<Pencil style="cursor:pointer" size={20} color="var(--white)" />
-								{/if}
-							</a>
-						{/if}
-					</div>
-				</Link>
+								<a
+									class="action-icon-container"
+									href={isEditing ? '/dashboard' : `?edit=${link.id}`}
+									title={isEditing ? 'Stop editing this link' : 'Edit this link'}
+									data-sveltekit-noscroll
+									data-sveltekit-replacestate
+									class:loading
+								>
+									{#if isEditing}
+										<CloseIcon style="cursor:pointer" size={20} color="var(--white)" />
+									{:else}
+										<Pencil style="cursor:pointer" size={20} color="var(--white)" />
+									{/if}
+								</a>
+							{/if}
+						</div>
+					</Link>
+				</li>
 			{/each}
-		</nav>
+		</ul>
 	</section>
 
 	<section class="create-link-container">
@@ -141,10 +145,14 @@
 		flex: 50%;
 	}
 
-	nav {
+	ul {
 		display: flex;
 		flex-direction: column;
 		gap: 16px;
 		margin-top: 16px;
+
+		li {
+			list-style: none;
+		}
 	}
 </style>
