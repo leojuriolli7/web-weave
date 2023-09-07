@@ -13,41 +13,51 @@
 	<meta name="description" content="Streamline your online presence." />
 </svelte:head>
 
-<main>
+<div class="outer">
 	<header>
+		<a href="/" class="logo">Web Weave</a>
+
 		{#if data.session.isLoggedIn === true}
 			<div class="user-section">
 				<img src={user?.avatar} alt="Your avatar" />
 
-				<a href="/dashboard">Dashboard</a>
+				<a href="/dashboard">
+					<Button variant="brand">Your dashboard</Button>
+				</a>
+				<form method="post" action="/logout" use:enhance>
+					<Button type="submit" variant="brand">Sign out</Button>
+				</form>
 			</div>
-
-			<form method="post" action="/logout" use:enhance>
-				<Button type="submit" variant="secondary">Sign out</Button>
-			</form>
 		{:else}
-			<a href="/login/github">Sign in with Github</a>
+			<a href="/login/github">
+				<Button variant="brand">Sign in with Github</Button>
+			</a>
 		{/if}
 	</header>
 
 	<slot />
-</main>
+</div>
 
 <style lang="scss">
-	main {
+	div.outer {
 		max-width: 1920px;
 		margin: 0 auto;
 	}
 
 	a {
-		text-decoration: underline;
+		text-decoration: none;
+	}
+
+	.logo {
+		font-size: 24px;
+		font-weight: 700;
+		letter-spacing: -0.02em;
 		color: var(--brand);
 	}
 
 	header {
 		height: 64px;
 		padding: 16px;
-		border-bottom: 2px solid var(--border);
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
@@ -55,7 +65,7 @@
 		.user-section {
 			display: flex;
 			align-items: center;
-			gap: 16px;
+			gap: 8px;
 		}
 
 		img {

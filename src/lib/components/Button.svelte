@@ -81,7 +81,7 @@
 	/* Variants */
 	.brand {
 		background: var(--brand);
-		color: var(--white);
+		color: #f2cee6;
 	}
 
 	.primary {
