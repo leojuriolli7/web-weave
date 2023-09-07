@@ -22,7 +22,7 @@
 				<img src={user?.avatar} alt="Your avatar" />
 
 				<a href="/dashboard">
-					<Button variant="brand">Your dashboard</Button>
+					<Button variant="brand">Dashboard</Button>
 				</a>
 				<form method="post" action="/logout" use:enhance>
 					<Button type="submit" variant="brand">Sign out</Button>
@@ -53,6 +53,10 @@
 		font-weight: 700;
 		letter-spacing: -0.02em;
 		color: var(--brand);
+
+		@media (max-width: 500px) {
+			display: none;
+		}
 	}
 
 	header {
