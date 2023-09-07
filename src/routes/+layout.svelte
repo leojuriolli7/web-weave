@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import Button from '$components/Button.svelte';
-	import '../app.css';
+	import '../app.scss';
 
 	export let data;
 

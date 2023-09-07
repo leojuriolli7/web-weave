@@ -15,6 +15,10 @@
 	--success: #1db954;
 }
 
+*:focus-visible {
+	outline: 1px solid var(--brand-muted);
+}
+
 body {
 	background: var(--dark-gray);
 	height: 100vh;
