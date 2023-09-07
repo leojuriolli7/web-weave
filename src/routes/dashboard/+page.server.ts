@@ -1,7 +1,7 @@
 import { links as linksTable } from '$drizzle/schema';
 import { tursoClient } from '$lib/server/db';
 import { fail, redirect } from '@sveltejs/kit';
-import { createLinkSchema, deleteLinkSchema, editLinkSchema } from './dashboard.schema';
+import { updateProfileSchema } from './dashboard.schema';
 import { eq } from 'drizzle-orm';
 import type { ZodError } from 'zod';
 
@@ -45,63 +45,18 @@ export const load = async ({ locals, depends }) => {
 };
 
 export const actions = {
-	createLink: async ({ request, locals }) => {
+	default: async ({ request, locals }) => {
 		const session = await locals.auth.validate();
 
 		if (!session) throw redirect(302, '/');
 
 		const form = Object.fromEntries(await request.formData());
-		const input = createLinkSchema.safeParse(form);
+		const input = updateProfileSchema.safeParse(form);
 
 		if (!input.success) {
 			const errors = parseZodErrors(input.error);
 
 			return fail(400, { error: true, errors });
-		}
-
-		const { title, url } = input.data;
-
-		await tursoClient.insert(linksTable).values({
-			authorId: session.user.userId,
-			title,
-			url
-		});
-	},
-	editLink: async ({ request, locals }) => {
-		const session = await locals.auth.validate();
-
-		if (!session) throw redirect(302, '/');
-
-		const form = Object.fromEntries(await request.formData());
-		const input = editLinkSchema.safeParse(form);
-
-		if (!input.success) {
-			const errors = parseZodErrors(input.error);
-
-			return fail(400, { error: true, errors });
-		}
-
-		const { id, newTitle, newUrl } = input.data;
-
-		await tursoClient
-			.update(linksTable)
-			.set({ title: newTitle, url: newUrl })
-			.where(eq(linksTable.id, id));
-
-		throw redirect(302, '/dashboard');
-	},
-	deleteLink: async ({ request, locals }) => {
-		const session = await locals.auth.validate();
-
-		if (!session) throw redirect(302, '/');
-
-		const form = Object.fromEntries(await request.formData());
-		const input = deleteLinkSchema.safeParse(form);
-
-		if (input.success) {
-			const { id } = input.data;
-
-			await tursoClient.delete(linksTable).where(eq(linksTable.id, id));
 		}
 	}
 };

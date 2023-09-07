@@ -15,6 +15,10 @@
 	--success: #1db954;
 }
 
+.space-y > * {
+	margin-top: 16px;
+}
+
 *:focus-visible {
 	outline: 3px solid var(--brand-muted);
 }
