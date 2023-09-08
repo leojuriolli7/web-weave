@@ -6,8 +6,9 @@
 
 	export let href: string;
 	export let media: IconNames;
+	export let iconSize: number = 24;
 </script>
 
 <a transition:slide={{ easing: cubicInOut }} href={prependHttps(href)} target="_blank">
-	<MediaIcon {media} color="var(--brand-muted)" />
+	<MediaIcon size={iconSize} {media} color="var(--brand-muted)" />
 </a>

@@ -1,9 +1,10 @@
 <script lang="ts">
 	import type { IconNames } from '$components/MediaIcon/MediaIcon.svelte';
 	import type { UpdateProfileInput } from '../dashboard.schema';
-	import PreviewLink from './PreviewLink.svelte';
+	import SocialLink from '$components/SocialLink.svelte';
+	import Link from '$components/Link.svelte';
 
-	type Link = {
+	type LinkType = {
 		name: IconNames;
 		url: string;
 	};
@@ -25,7 +26,7 @@
 		{ name: 'Twitch', url: profile.twitch },
 		{ name: 'Telegram', url: profile.telegram },
 		{ name: 'Tiktok', url: profile.tiktok }
-	] as Link[];
+	] as LinkType[];
 </script>
 
 <div class="phone">
@@ -44,7 +45,15 @@
 		<nav class="social-links">
 			{#each socialMediaLinks as link}
 				{#if link.url}
-					<PreviewLink media={link.name} href={link.url} />
+					<SocialLink media={link.name} href={link.url} />
+				{/if}
+			{/each}
+		</nav>
+
+		<nav class="extra-links">
+			{#each profile.links as link (link.id)}
+				{#if link.title}
+					<Link variant="small" href={link.url}>{link.title}</Link>
 				{/if}
 			{/each}
 		</nav>
@@ -155,5 +164,13 @@
 		align-items: center;
 		justify-content: center;
 		margin-top: 16px;
+	}
+
+	.extra-links {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+		width: 100%;
+		margin-top: 18px;
 	}
 </style>

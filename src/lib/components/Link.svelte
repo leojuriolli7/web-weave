@@ -1,26 +1,21 @@
 <script lang="ts">
-	import type { Link } from '$drizzle/schema';
+	import { prependHttps } from '$lib/utils/prependHttps';
+	import { cubicInOut } from 'svelte/easing';
+	import { slide } from 'svelte/transition';
 
-	export let link: Link;
-	export let loading = false;
-	export let showLink = true;
+	export let href: string;
+	export let variant: 'small' | 'base' = 'base';
 </script>
 
-<div class:loading class="user-link-content">
-	{#if showLink}
-		<a class="user-link" href={link.url}>
-			{link.title}
-		</a>
-	{:else}
-		<slot name="alternate" />
-	{/if}
-
-	{#if $$slots.right}
-		<div class="right-container">
-			<slot name="right" />
-		</div>
-	{/if}
-</div>
+<a
+	transition:slide={{ easing: cubicInOut, duration: 250 }}
+	class="user-link"
+	href={prependHttps(href)}
+>
+	<div class="user-link-content {variant}">
+		<slot />
+	</div>
+</a>
 
 <style lang="scss">
 	.user-link {
@@ -29,26 +24,33 @@
 		width: 100%;
 	}
 
+	.base {
+		padding: 12px 44px;
+
+		@media (max-width: 650px) {
+			padding: 12px 24px;
+		}
+	}
+
+	.small {
+		padding: 6px 22px;
+
+		font-size: 15px;
+	}
+
 	.user-link-content {
 		width: 100%;
-		padding: 12px 44px;
-		background: var(--medium-gray);
+		background: var(--dark-gray);
 		border-radius: 25px;
 		border: 1px solid var(--border);
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
 		gap: 12px;
-
-		@media (max-width: 650px) {
-			padding: 12px 24px;
-		}
-
-		&.loading {
-			opacity: 50%;
-		}
+		transition: all cubic-bezier(0.19, 1, 0.22, 1) 300ms;
 
 		&:hover {
+			border-color: var(--brand-muted);
 			box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 		}
 	}

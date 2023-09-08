@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import isURL from 'validator/lib/isURL';
+import { requiredString } from '$lib/utils/requiredString';
 
 const regexes = {
 	twitter: /^(https?:\/\/)?(www\.)?twitter\.com\/([a-zA-Z0-9_]+)\/?$/i,
@@ -46,7 +47,14 @@ export const updateProfileSchema = z.object({
 	linkedin: getSocialSchema(regexes.linkedin, 'Linkedin'),
 	tiktok: getSocialSchema(regexes.tiktok, 'Tiktok'),
 	twitch: getSocialSchema(regexes.twitch, 'Twitch'),
-	telegram: getSocialSchema(regexes.telegram, 'Telegram')
+	telegram: getSocialSchema(regexes.telegram, 'Telegram'),
+	links: z
+		.object({
+			title: requiredString.min(5, 'Minimum of 5').max(50, 'Maximum of 50'),
+			url: requiredString.url('Invalid URL').min(5, 'Minimum of 5').max(100, 'Maximum of 100'),
+			id: z.union([z.string(), z.number()])
+		})
+		.array()
 });
 
 export type UpdateProfileInput = z.infer<typeof updateProfileSchema>;

@@ -4,6 +4,8 @@
 	import { invalidate } from '$app/navigation';
 	import PhonePreview from './Preview/PhonePreview.svelte';
 	import { expoInOut } from 'svelte/easing';
+	import { Plus, Trash2 } from 'lucide-svelte';
+	import { slide } from 'svelte/transition';
 
 	export let data;
 
@@ -20,10 +22,8 @@
 
 	/**
 	 * TO-DOs:
-	 * 1. Extra/Custom links
-	 * 2. Display links on profile page
-	 * 3. Finish homepage
-	 * 4. Custom colors/styling
+	 * 1. Finish homepage
+	 * 2. Custom colors/styling
 	 */
 </script>
 
@@ -146,6 +146,67 @@
 							placeholder="telegram.com/you"
 							bind:value={profile.telegram}
 						/>
+					</div>
+				</section>
+
+				<section>
+					<h2>Add more links</h2>
+					<p>Add any extra links you might want to share.</p>
+
+					<div class="fields space-y">
+						{#each profile.links as link (link.id)}
+							<div transition:slide class="link-form">
+								<Button
+									variant="danger"
+									size="base"
+									style="position: absolute; top: -10px; right: 10px;"
+									on:click={() => {
+										profile.links = profile.links.filter((value) => value.id !== link.id);
+									}}
+								>
+									<Trash2 size={18} />
+								</Button>
+								<Field
+									disabled={isLoading}
+									label="Title"
+									name="links.title[{link.id}]"
+									placeholder="Give your link a title..."
+									bind:value={link.title}
+								/>
+								<Field
+									disabled={isLoading}
+									label="URL"
+									name="links.url[{link.id}]"
+									placeholder="Type a url..."
+									style="margin-top: 16px"
+									bind:value={link.url}
+								/>
+							</div>
+						{/each}
+
+						<Button
+							on:click={() => {
+								const randomNumber = Math.random() * 10e15;
+								const id = `__new-${randomNumber}`;
+
+								profile.links.push({
+									image: null,
+									id,
+									authorId: profile.id,
+									title: '',
+									url: ''
+								});
+
+								profile.links = profile.links;
+							}}
+							disabled={isLoading}
+							type="button"
+							variant="primary"
+							full
+							size="large"
+						>
+							<Plus size={22} />
+						</Button>
 					</div>
 				</section>
 
@@ -296,5 +357,12 @@
 		padding: 32px 16px;
 		display: flex;
 		justify-content: center;
+	}
+
+	.link-form {
+		padding: 16px;
+		border-radius: 12px;
+		border: 1px solid var(--border);
+		position: relative;
 	}
 </style>
