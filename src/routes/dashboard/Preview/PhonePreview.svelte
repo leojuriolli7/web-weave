@@ -70,8 +70,10 @@
 
 		@media (max-width: 650px) {
 			width: auto;
-			height: 70vh;
-			max-width: 300px;
+			height: 77dvh;
+			aspect-ratio: 9/16;
+			margin-top: 0px;
+			max-width: 85vw;
 		}
 
 		.notch {
