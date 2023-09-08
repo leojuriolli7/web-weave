@@ -54,14 +54,19 @@
 <style lang="scss">
 	.phone {
 		top: 32px;
+		margin-top: 32px;
 		position: sticky;
-		min-width: 350px;
 		height: 700px;
 		width: 350px;
 		border-radius: 2.5rem;
 		border: 14px solid var(--night);
 		box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 		background: var(--medium-gray);
+
+		@media (max-width: 820px) {
+			width: 256px;
+			height: 500px;
+		}
 
 		.notch {
 			position: absolute;

@@ -70,7 +70,7 @@
 					</div>
 				</section>
 
-				<section>
+				<section class="social-section">
 					<h2>Your social links</h2>
 					<p>Centralize all your social media.</p>
 
@@ -162,7 +162,7 @@
 		max-width: 1200px;
 		width: 100%;
 		margin: 0 auto;
-		padding-bottom: 60px;
+		padding: 0 30px 60px 30px;
 
 		& > p {
 			color: var(--light-gray);
@@ -170,6 +170,10 @@
 		}
 		h1 {
 			color: var(--white);
+
+			@media (max-width: 615px) {
+				margin-top: 32px;
+			}
 		}
 	}
 	.content {
@@ -203,11 +207,20 @@
 		flex: 50%;
 	}
 
+	.social-section {
+		container-type: inline-size;
+	}
 	.fields-grid {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
 		align-items: end;
 		column-gap: 12px;
+
+		@container (width < 390px) {
+			& {
+				grid-template-columns: 1fr;
+			}
+		}
 	}
 
 	.left-side {
@@ -216,6 +229,18 @@
 	.right-side {
 		display: flex;
 		justify-content: center;
+
+		@media (max-width: 975px) {
+			flex: 30%;
+		}
+
+		@media (max-width: 820px) {
+			flex: 20%;
+		}
+
+		@media (max-width: 615px) {
+			display: none;
+		}
 	}
 
 	.save-footer {
