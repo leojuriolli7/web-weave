@@ -1,4 +1,4 @@
-import { links as linksTable } from '$drizzle/schema';
+import { users } from '$drizzle/schema';
 import { tursoClient } from '$lib/server/db';
 import { fail, redirect } from '@sveltejs/kit';
 import { updateProfileSchema } from './dashboard.schema';
@@ -32,15 +32,22 @@ function parseZodErrors(formErrors: ZodError) {
 
 export const load = async ({ locals, depends }) => {
 	const session = await locals.auth.validate();
-	depends('app:your-links');
+	depends('app:your-dashboard');
 
 	if (!session) throw redirect(302, '/');
 
+	const profile = await tursoClient.query.users.findFirst({
+		where: eq(users.id, session.user.userId),
+		with: {
+			links: true
+		}
+	});
+
+	if (!profile) throw redirect(302, '/');
+
 	return {
 		user: session.user,
-		links: await tursoClient.query.links.findMany({
-			where: eq(linksTable.authorId, session.user.userId)
-		})
+		profile
 	};
 };
 
@@ -58,5 +65,11 @@ export const actions = {
 
 			return fail(400, { error: true, errors });
 		}
+
+		const { ...values } = input.data;
+
+		await tursoClient.update(users).set({
+			...values
+		});
 	}
 };

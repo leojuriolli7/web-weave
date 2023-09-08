@@ -1,10 +1,23 @@
 <script>
-	import { enhance } from '$app/forms';
+	import { applyAction, enhance } from '$app/forms';
 	import Button from '$components/Button.svelte';
 	import Field from '$components/Field.svelte';
-	import { Plus } from 'lucide-svelte';
+	import { invalidate } from '$app/navigation';
+
+	export let data;
+
+	$: profile = data.profile;
 
 	let isLoading = false;
+
+	/**
+	 * TO-DOs:
+	 * 1. Extra/Custom links
+	 * 2. Real-time preview
+	 * 3. Responsive design
+	 * 4. Display links on profile page
+	 * 5. Finish homepage
+	 */
 </script>
 
 <div class="outer">
@@ -18,9 +31,14 @@
 				use:enhance={() => {
 					isLoading = true;
 
-					return ({ update }) => {
+					return ({ result }) => {
 						isLoading = false;
-						update();
+
+						if (result.type === 'success') {
+							invalidate('app:your-dashboard');
+						}
+
+						applyAction(result);
 					};
 				}}
 			>
@@ -30,12 +48,13 @@
 
 					<div class="fields space-y">
 						<Field
-							disabled={isLoading}
+							disabled
 							prefix="webweave.com/"
 							style="margin-top: 16px"
 							label="Name"
-							name="name"
+							name="username"
 							placeholder="your username..."
+							defaultValue={profile.username}
 						/>
 
 						<Field
@@ -44,6 +63,7 @@
 							name="description"
 							placeholder="A description about you..."
 							type="textarea"
+							defaultValue={profile.description}
 						/>
 					</div>
 				</section>
@@ -58,71 +78,57 @@
 							label="Twitter"
 							name="twitter"
 							placeholder="twitter.com/you"
+							defaultValue={profile.twitter}
 						/>
 						<Field
 							disabled={isLoading}
 							label="Instagram"
 							name="instagram"
 							placeholder="instagram.com/you"
+							defaultValue={profile.instagram}
 						/>
 						<Field
 							disabled={isLoading}
 							label="Facebook"
 							name="facebook"
 							placeholder="facebook.com/you"
+							defaultValue={profile.facebook}
 						/>
 						<Field
 							disabled={isLoading}
 							label="Youtube"
 							name="youtube"
 							placeholder="youtube.com/@you"
+							defaultValue={profile.youtube}
 						/>
 						<Field
 							disabled={isLoading}
 							label="Linkedin"
 							name="linkedin"
 							placeholder="linkedin.com/you"
+							defaultValue={profile.linkedin}
 						/>
 						<Field
 							disabled={isLoading}
 							label="Reddit"
 							name="reddit"
 							placeholder="reddit.com/u/you"
+							defaultValue={profile.reddit}
 						/>
-						<Field disabled={isLoading} label="Twitch" name="twitch" placeholder="twitch.tv/you" />
+						<Field
+							disabled={isLoading}
+							label="Twitch"
+							name="twitch"
+							placeholder="twitch.tv/you"
+							defaultValue={profile.twitch}
+						/>
 						<Field
 							disabled={isLoading}
 							label="Telegram"
 							name="telegram"
 							placeholder="telegram.com/you"
+							defaultValue={profile.telegram}
 						/>
-					</div>
-				</section>
-
-				<section>
-					<h2>Add more links</h2>
-					<p>Add any extra links you might want to share.</p>
-
-					<div class="fields space-y">
-						<div class="link-form">
-							<Field
-								disabled={isLoading}
-								label="Title"
-								name="title"
-								placeholder="Give your link a title..."
-							/>
-							<Field
-								disabled={isLoading}
-								label="URL"
-								name="url"
-								placeholder="Type a url..."
-								style="margin-top: 16px"
-							/>
-						</div>
-
-						<Button disabled={isLoading} type="button" variant="primary" full size="large">
-							<Plus size={22} />
-						</Button>
 					</div>
 				</section>
 
@@ -207,12 +213,6 @@
 			height: 700px;
 			width: 400px;
 		}
-	}
-
-	.link-form {
-		padding: 16px;
-		border-radius: 12px;
-		border: 1px solid var(--border);
 	}
 
 	.save-footer {
