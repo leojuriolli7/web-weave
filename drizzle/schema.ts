@@ -9,7 +9,16 @@ export const users = sqliteTable('auth_user', {
 		length: 55
 	}).unique(),
 	email: text('email'),
-	avatar: text('avatar')
+	avatar: text('avatar'),
+	description: text('description'),
+	twitter: text('twitter_url'),
+	instagram: text('instagram_url'),
+	facebook: text('facebook_url'),
+	youtube: text('youtube_url'),
+	linkedin: text('linkedin_url'),
+	tiktok: text('tiktok_url'),
+	twitch: text('twitch_url'),
+	telegram: text('telegram_url')
 });
 
 export const usersRelations = relations(users, ({ many }) => ({

@@ -1,0 +1,1 @@
+ALTER TABLE `auth_user` RENAME COLUMN `reddit_url` TO `tiktok_url`;

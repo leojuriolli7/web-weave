@@ -1,158 +1,228 @@
-<script lang="ts">
-	import { enhance } from '$app/forms';
+<script>
+	import { applyAction, enhance } from '$app/forms';
+	import Button from '$components/Button.svelte';
+	import Field from '$components/Field.svelte';
 	import { invalidate } from '$app/navigation';
-	import { page } from '$app/stores';
-	import { Link } from '$components';
-	import { Pencil, Trash2, X as CloseIcon } from 'lucide-svelte';
-	import { flip } from 'svelte/animate';
-	import { slide } from 'svelte/transition';
-	import UpsertLinkForm from './UpsertLinkForm.svelte';
+	import PhonePreview from './Preview/PhonePreview.svelte';
 
 	export let data;
-	let creatingLink = false;
-	let deletingLinks: number[] = [];
-	let editingLinks: number[] = [];
 
-	$: editParam = $page.url.searchParams.get('edit');
+	$: profile = data.profile;
+
+	let isLoading = false;
+
+	/**
+	 * TO-DOs:
+	 * 1. Extra/Custom links
+	 * 2. Responsive design
+	 * 3. Display links on profile page
+	 * 4. Finish homepage
+	 * 5. Custom colors/styling
+	 */
 </script>
 
-<div class="outer-container">
-	<section>
-		<h2>Your created links</h2>
+<div class="outer">
+	<h1>Your Dashboard</h1>
+	<p>Here is your personal hub for customizing your account and your links.</p>
+	<div class="content">
+		<main class="left-side">
+			<form
+				method="POST"
+				class="space-y"
+				use:enhance={() => {
+					isLoading = true;
 
-		<ul>
-			{#each data.links as link (link.id)}
-				{@const isEditing = editParam && Number(editParam) === link.id}
-				{@const loadingDelete = deletingLinks?.some((value) => value === link.id)}
-				{@const loadingEdit = editingLinks?.some((value) => value === link.id)}
-				{@const loading = loadingDelete || loadingEdit}
-				{@const canShowActions = !loading && !isEditing}
+					return ({ result }) => {
+						isLoading = false;
 
-				<li animate:flip={{ duration: 300 }} transition:slide>
-					<Link {loading} {link} showLink={!isEditing}>
-						<UpsertLinkForm
-							slot="alternate"
-							loading={creatingLink}
-							mode="edit"
-							defaultValues={{
-								id: link.id,
-								title: link.title,
-								url: link.url
-							}}
+						if (result.type === 'success') {
+							invalidate('app:your-dashboard');
+						}
+
+						applyAction(result);
+					};
+				}}
+			>
+				<section>
+					<h2>Your information</h2>
+					<p>Enter your profile information here.</p>
+
+					<div class="fields space-y">
+						<Field
+							disabled
+							prefix="webweave.com/"
+							style="margin-top: 16px"
+							label="Name"
+							name="username"
+							placeholder="your username..."
+							bind:value={profile.username}
 						/>
 
-						<div class="link-actions" slot="right">
-							{#if canShowActions}
-								<form
-									method="POST"
-									action="?/deleteLink"
-									title="Delete this link"
-									class="delete-form"
-									use:enhance={() => {
-										deletingLinks = [...deletingLinks, link.id];
+						<Field
+							disabled={isLoading}
+							label="About yourself"
+							name="description"
+							placeholder="A description about you..."
+							type="textarea"
+							maxLength={200}
+							bind:value={profile.description}
+						/>
+					</div>
+				</section>
 
-										return ({ update, result }) => {
-											update();
+				<section>
+					<h2>Your social links</h2>
+					<p>Centralize all your social media.</p>
 
-											deletingLinks = deletingLinks?.filter((val) => val !== link.id);
+					<div class="fields space-y fields-grid">
+						<Field
+							disabled={isLoading}
+							label="Twitter"
+							name="twitter"
+							placeholder="twitter.com/you"
+							icon="Twitter"
+							bind:value={profile.twitter}
+						/>
+						<Field
+							disabled={isLoading}
+							label="Instagram"
+							icon="Instagram"
+							name="instagram"
+							placeholder="instagram.com/you"
+							bind:value={profile.instagram}
+						/>
 
-											if (result.type === 'success') {
-												// update the links list
-												invalidate('app:your-links');
-											}
-										};
-									}}
-								>
-									<input name="id" value={link.id} style:display="none" style:visibility="hidden" />
-									<button
-										style:background="none"
-										style:border="none"
-										class="action-icon-container"
-										type="submit"
-										disabled={loading}
-									>
-										<Trash2 style="cursor:pointer" size={21} color="var(--white)" />
-									</button>
-								</form>
+						<Field
+							disabled={isLoading}
+							label="Facebook"
+							icon="Facebook"
+							name="facebook"
+							placeholder="facebook.com/you"
+							bind:value={profile.facebook}
+						/>
+						<Field
+							disabled={isLoading}
+							label="Youtube"
+							icon="Youtube"
+							name="youtube"
+							placeholder="youtube.com/@you"
+							bind:value={profile.youtube}
+						/>
+						<Field
+							disabled={isLoading}
+							label="Linkedin"
+							icon="Linkedin"
+							name="linkedin"
+							placeholder="linkedin.com/you"
+							bind:value={profile.linkedin}
+						/>
+						<Field
+							disabled={isLoading}
+							label="Tiktok"
+							icon="Tiktok"
+							name="tiktok"
+							placeholder="tiktok.com/@you"
+							bind:value={profile.tiktok}
+						/>
+						<Field
+							disabled={isLoading}
+							label="Twitch"
+							icon="Twitch"
+							name="twitch"
+							placeholder="twitch.tv/you"
+							bind:value={profile.twitch}
+						/>
+						<Field
+							disabled={isLoading}
+							label="Telegram"
+							icon="Telegram"
+							name="telegram"
+							placeholder="telegram.com/you"
+							bind:value={profile.telegram}
+						/>
+					</div>
+				</section>
 
-								<a
-									class="action-icon-container"
-									href={isEditing ? '/dashboard' : `?edit=${link.id}`}
-									title={isEditing ? 'Stop editing this link' : 'Edit this link'}
-									data-sveltekit-noscroll
-									data-sveltekit-replacestate
-									class:loading
-								>
-									{#if isEditing}
-										<CloseIcon style="cursor:pointer" size={20} color="var(--white)" />
-									{:else}
-										<Pencil style="cursor:pointer" size={20} color="var(--white)" />
-									{/if}
-								</a>
-							{/if}
-						</div>
-					</Link>
-				</li>
-			{/each}
-		</ul>
-	</section>
+				<div class="save-footer">
+					<Button type="submit" variant="brand" loading={isLoading} full size="large"
+						>Save your changes</Button
+					>
+				</div>
+			</form>
+		</main>
 
-	<section class="create-link-container">
-		<h2 style:margin-bottom="16px">Create a new link</h2>
-		<UpsertLinkForm loading={creatingLink} mode="create" />
-	</section>
+		<div class="right-side">
+			<PhonePreview user={data.user} {profile} />
+		</div>
+	</div>
 </div>
 
 <style lang="scss">
-	h2 {
-		color: var(--silver);
-		line-height: 32px;
-		font-size: 24px;
-		font-weight: 600;
-	}
+	.outer {
+		max-width: 1200px;
+		width: 100%;
+		margin: 0 auto;
+		padding-bottom: 60px;
 
-	.create-link-container {
-		max-width: 300px;
-
-		@media (max-width: 1200px) {
-			margin-top: 32px;
+		& > p {
+			color: var(--light-gray);
+			line-height: 24px;
+		}
+		h1 {
+			color: var(--white);
 		}
 	}
-
-	.link-actions {
-		display: flex;
-		align-items: center;
-		gap: 12px;
-	}
-
-	.action-icon-container {
-		display: flex;
-	}
-
-	.outer-container {
-		padding: 32px;
-		max-width: 1200px;
-		margin: 0 auto;
+	.content {
+		width: 100%;
 		display: flex;
 		gap: 32px;
+		justify-content: center;
+	}
+	section {
+		border: 1px solid var(--border);
+		border-radius: 12px;
+		padding: 24px;
+		width: 100%;
 
-		@media (max-width: 800px) {
-			display: block;
+		h2 {
+			line-height: 30px;
+			font-size: 24px;
+			color: var(--brand-muted);
+		}
+
+		p {
+			color: var(--silver);
+			line-height: 22px;
+			font-size: 15px;
+			margin-top: 6px;
 		}
 	}
 
-	section {
+	.left-side,
+	.right-side {
 		flex: 50%;
 	}
 
-	ul {
-		display: flex;
-		flex-direction: column;
-		gap: 16px;
-		margin-top: 16px;
+	.fields-grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		align-items: end;
+		column-gap: 12px;
+	}
 
-		li {
-			list-style: none;
-		}
+	.left-side {
+		position: relative;
+	}
+	.right-side {
+		display: flex;
+		justify-content: center;
+	}
+
+	.save-footer {
+		position: sticky;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		padding: 10px 0;
 	}
 </style>
