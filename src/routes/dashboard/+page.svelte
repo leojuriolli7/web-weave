@@ -3,6 +3,7 @@
 	import Button from '$components/Button.svelte';
 	import Field from '$components/Field.svelte';
 	import { invalidate } from '$app/navigation';
+	import PhonePreview from './Preview/PhonePreview.svelte';
 
 	export let data;
 
@@ -13,10 +14,10 @@
 	/**
 	 * TO-DOs:
 	 * 1. Extra/Custom links
-	 * 2. Real-time preview
-	 * 3. Responsive design
-	 * 4. Display links on profile page
-	 * 5. Finish homepage
+	 * 2. Responsive design
+	 * 3. Display links on profile page
+	 * 4. Finish homepage
+	 * 5. Custom colors/styling
 	 */
 </script>
 
@@ -63,6 +64,7 @@
 							name="description"
 							placeholder="A description about you..."
 							type="textarea"
+							maxLength={200}
 							bind:value={profile.description}
 						/>
 					</div>
@@ -78,18 +80,22 @@
 							label="Twitter"
 							name="twitter"
 							placeholder="twitter.com/you"
+							icon="Twitter"
 							bind:value={profile.twitter}
 						/>
 						<Field
 							disabled={isLoading}
 							label="Instagram"
+							icon="Instagram"
 							name="instagram"
 							placeholder="instagram.com/you"
 							bind:value={profile.instagram}
 						/>
+
 						<Field
 							disabled={isLoading}
 							label="Facebook"
+							icon="Facebook"
 							name="facebook"
 							placeholder="facebook.com/you"
 							bind:value={profile.facebook}
@@ -97,6 +103,7 @@
 						<Field
 							disabled={isLoading}
 							label="Youtube"
+							icon="Youtube"
 							name="youtube"
 							placeholder="youtube.com/@you"
 							bind:value={profile.youtube}
@@ -104,20 +111,23 @@
 						<Field
 							disabled={isLoading}
 							label="Linkedin"
+							icon="Linkedin"
 							name="linkedin"
 							placeholder="linkedin.com/you"
 							bind:value={profile.linkedin}
 						/>
 						<Field
 							disabled={isLoading}
-							label="Reddit"
-							name="reddit"
-							placeholder="reddit.com/u/you"
-							bind:value={profile.reddit}
+							label="Tiktok"
+							icon="Tiktok"
+							name="tiktok"
+							placeholder="tiktok.com/@you"
+							bind:value={profile.tiktok}
 						/>
 						<Field
 							disabled={isLoading}
 							label="Twitch"
+							icon="Twitch"
 							name="twitch"
 							placeholder="twitch.tv/you"
 							bind:value={profile.twitch}
@@ -125,6 +135,7 @@
 						<Field
 							disabled={isLoading}
 							label="Telegram"
+							icon="Telegram"
 							name="telegram"
 							placeholder="telegram.com/you"
 							bind:value={profile.telegram}
@@ -141,7 +152,7 @@
 		</main>
 
 		<div class="right-side">
-			<img src="/phone.png" alt="Phone" />
+			<PhonePreview user={data.user} {profile} />
 		</div>
 	</div>
 </div>
@@ -205,14 +216,6 @@
 	.right-side {
 		display: flex;
 		justify-content: center;
-
-		img {
-			top: 32px;
-			position: sticky;
-			min-width: 400px;
-			height: 700px;
-			width: 400px;
-		}
 	}
 
 	.save-footer {

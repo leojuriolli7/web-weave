@@ -16,7 +16,7 @@ export const users = sqliteTable('auth_user', {
 	facebook: text('facebook_url'),
 	youtube: text('youtube_url'),
 	linkedin: text('linkedin_url'),
-	reddit: text('reddit_url'),
+	tiktok: text('tiktok_url'),
 	twitch: text('twitch_url'),
 	telegram: text('telegram_url')
 });
