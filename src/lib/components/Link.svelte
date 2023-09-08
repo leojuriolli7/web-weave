@@ -40,7 +40,7 @@
 		justify-content: space-between;
 		gap: 12px;
 
-		@media (max-width: 600px) {
+		@media (max-width: 650px) {
 			padding: 12px 24px;
 		}
 

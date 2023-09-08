@@ -68,9 +68,10 @@
 			height: 550px;
 		}
 
-		@media (max-width: 820px) {
-			width: 256px;
-			height: 500px;
+		@media (max-width: 650px) {
+			width: auto;
+			height: 70vh;
+			max-width: 300px;
 		}
 
 		.notch {

@@ -1,23 +1,29 @@
 <script>
 	import { applyAction, enhance } from '$app/forms';
-	import Button from '$components/Button.svelte';
-	import Field from '$components/Field.svelte';
+	import { Button, Drawer, Field } from '$components';
 	import { invalidate } from '$app/navigation';
 	import PhonePreview from './Preview/PhonePreview.svelte';
+	import { expoInOut } from 'svelte/easing';
 
 	export let data;
 
 	$: profile = data.profile;
 
 	let isLoading = false;
+	let drawerVisible = false;
+
+	let drawerTransitionParams = {
+		y: 200,
+		duration: 400,
+		easing: expoInOut
+	};
 
 	/**
 	 * TO-DOs:
 	 * 1. Extra/Custom links
-	 * 2. Add preview on mobile
-	 * 3. Display links on profile page
-	 * 4. Finish homepage
-	 * 5. Custom colors/styling
+	 * 2. Display links on profile page
+	 * 3. Finish homepage
+	 * 4. Custom colors/styling
 	 */
 </script>
 
@@ -144,13 +150,31 @@
 				</section>
 
 				<div class="save-footer">
-					<Button type="submit" variant="brand" loading={isLoading} full size="large"
-						>Save your changes</Button
+					<Button
+						on:click={() => (drawerVisible = true)}
+						type="button"
+						disabled={isLoading}
+						size="large">Open Preview</Button
 					>
+					<Button type="submit" variant="brand" loading={isLoading} size="large">Update</Button>
 				</div>
 			</form>
+
+			<!-- Mobile preview -->
+			<Drawer
+				placement="bottom"
+				transitionParams={drawerTransitionParams}
+				bind:visible={drawerVisible}
+				id="preview-drawer"
+				width="100%"
+			>
+				<div class="preview-drawer-content">
+					<PhonePreview user={data.user} {profile} />
+				</div>
+			</Drawer>
 		</main>
 
+		<!-- Desktop preview -->
 		<div class="right-side">
 			<PhonePreview user={data.user} {profile} />
 		</div>
@@ -171,9 +195,13 @@
 		h1 {
 			color: var(--white);
 
-			@media (max-width: 615px) {
+			@media (max-width: 650px) {
 				margin-top: 32px;
 			}
+		}
+
+		@media (max-width: 650px) {
+			padding: 0 16px 30px 16px;
 		}
 	}
 	.content {
@@ -187,6 +215,10 @@
 		border-radius: 12px;
 		padding: 24px;
 		width: 100%;
+
+		@media (max-width: 650px) {
+			padding: 16px;
+		}
 
 		h2 {
 			line-height: 30px;
@@ -244,5 +276,25 @@
 		left: 0;
 		width: 100%;
 		padding: 10px 0;
+		display: flex;
+		gap: 12px;
+
+		:global(button:first-child) {
+			display: none;
+
+			@media (max-width: 650px) {
+				display: flex;
+			}
+		}
+
+		:global(button) {
+			flex: 1;
+		}
+	}
+
+	.preview-drawer-content {
+		padding: 32px 16px;
+		display: flex;
+		justify-content: center;
 	}
 </style>

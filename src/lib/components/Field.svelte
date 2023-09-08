@@ -128,6 +128,10 @@
 			color: var(--white);
 			resize: vertical;
 
+			@media (max-width: 650px) {
+				font-size: 16px;
+			}
+
 			&:disabled {
 				opacity: 0.5;
 				cursor: not-allowed;
