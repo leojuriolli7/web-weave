@@ -14,7 +14,7 @@
 	/**
 	 * TO-DOs:
 	 * 1. Extra/Custom links
-	 * 2. Responsive design
+	 * 2. Add preview on mobile
 	 * 3. Display links on profile page
 	 * 4. Finish homepage
 	 * 5. Custom colors/styling
@@ -231,14 +231,9 @@
 		justify-content: center;
 
 		@media (max-width: 975px) {
-			flex: 30%;
-		}
-
-		@media (max-width: 820px) {
 			flex: 20%;
 		}
-
-		@media (max-width: 615px) {
+		@media (max-width: 650px) {
 			display: none;
 		}
 	}

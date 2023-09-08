@@ -63,6 +63,11 @@
 		box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 		background: var(--medium-gray);
 
+		@media (max-width: 975px) {
+			width: 280px;
+			height: 550px;
+		}
+
 		@media (max-width: 820px) {
 			width: 256px;
 			height: 500px;
