@@ -5,7 +5,6 @@
 		message: string;
 	};
 
-	export let defaultValue: string | null = null;
 	export let name: string;
 	export let label: string;
 	export let placeholder: string;
@@ -13,6 +12,7 @@
 	export let prefix: string | undefined = undefined;
 	export let type: 'text' | 'textarea' = 'text';
 	export let disabled = false;
+	export let value: string | null = null;
 
 	const id = (Math.random() * 10e15).toString(16);
 
@@ -39,7 +39,8 @@
 				bind:this={input}
 				{disabled}
 				class="field-input"
-				value={defaultValue}
+				bind:value
+				type="text"
 				{placeholder}
 				{id}
 				{name}
@@ -49,7 +50,7 @@
 				bind:this={input}
 				{disabled}
 				class="field-input"
-				value={defaultValue}
+				bind:value
 				{placeholder}
 				{id}
 				{name}

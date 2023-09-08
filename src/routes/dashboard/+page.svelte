@@ -54,7 +54,7 @@
 							label="Name"
 							name="username"
 							placeholder="your username..."
-							defaultValue={profile.username}
+							bind:value={profile.username}
 						/>
 
 						<Field
@@ -63,7 +63,7 @@
 							name="description"
 							placeholder="A description about you..."
 							type="textarea"
-							defaultValue={profile.description}
+							bind:value={profile.description}
 						/>
 					</div>
 				</section>
@@ -78,56 +78,56 @@
 							label="Twitter"
 							name="twitter"
 							placeholder="twitter.com/you"
-							defaultValue={profile.twitter}
+							bind:value={profile.twitter}
 						/>
 						<Field
 							disabled={isLoading}
 							label="Instagram"
 							name="instagram"
 							placeholder="instagram.com/you"
-							defaultValue={profile.instagram}
+							bind:value={profile.instagram}
 						/>
 						<Field
 							disabled={isLoading}
 							label="Facebook"
 							name="facebook"
 							placeholder="facebook.com/you"
-							defaultValue={profile.facebook}
+							bind:value={profile.facebook}
 						/>
 						<Field
 							disabled={isLoading}
 							label="Youtube"
 							name="youtube"
 							placeholder="youtube.com/@you"
-							defaultValue={profile.youtube}
+							bind:value={profile.youtube}
 						/>
 						<Field
 							disabled={isLoading}
 							label="Linkedin"
 							name="linkedin"
 							placeholder="linkedin.com/you"
-							defaultValue={profile.linkedin}
+							bind:value={profile.linkedin}
 						/>
 						<Field
 							disabled={isLoading}
 							label="Reddit"
 							name="reddit"
 							placeholder="reddit.com/u/you"
-							defaultValue={profile.reddit}
+							bind:value={profile.reddit}
 						/>
 						<Field
 							disabled={isLoading}
 							label="Twitch"
 							name="twitch"
 							placeholder="twitch.tv/you"
-							defaultValue={profile.twitch}
+							bind:value={profile.twitch}
 						/>
 						<Field
 							disabled={isLoading}
 							label="Telegram"
 							name="telegram"
 							placeholder="telegram.com/you"
-							defaultValue={profile.telegram}
+							bind:value={profile.telegram}
 						/>
 					</div>
 				</section>
