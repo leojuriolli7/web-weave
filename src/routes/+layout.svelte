@@ -20,7 +20,7 @@
 		{#if data.session.isLoggedIn === true}
 			<div aria-haspopup="true" class="user-dropdown__container">
 				<button type="button">
-					<img src={user?.avatar} alt="Your avatar" />
+					<img class="user-avatar" src={user?.avatar} alt="Your avatar" />
 				</button>
 
 				<div class="user-dropdown__content" aria-label="submenu">
@@ -69,7 +69,8 @@
 		align-items: center;
 		justify-content: space-between;
 
-		img {
+		img.user-avatar {
+			cursor: pointer;
 			width: 36px;
 			height: 36px;
 			border-radius: 50%;

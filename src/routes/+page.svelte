@@ -41,14 +41,13 @@
 		background-color: var(--medium-gray);
 		padding: 128px 32px;
 		text-align: center;
-		background-color: #d8aaf9;
 
 		p {
 			font-size: clamp(16px, 2vmin, 20px);
 			font-weight: 400;
 			letter-spacing: -0.02em;
 			line-height: 1.5;
-			color: #95009b;
+			color: #e787eb;
 			margin-top: 32px;
 			max-width: 700px;
 		}
@@ -94,9 +93,9 @@
 	}
 
 	h1 {
-		color: var(--brand);
+		color: #8075ff;
 		font-size: clamp(32px, 8.5vmin, 50px);
 		letter-spacing: -0.02em;
-		text-shadow: #f92a82 2px 3px;
+		text-shadow: #f92a82 2px 2px;
 	}
 </style>

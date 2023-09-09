@@ -138,6 +138,13 @@
 			height: 100%;
 			overflow-y: auto;
 
+			-ms-overflow-style: none;
+			scrollbar-width: none;
+
+			&::-webkit-scrollbar {
+				display: none;
+			}
+
 			img {
 				border-radius: 50%;
 				width: 64px;

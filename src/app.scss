@@ -27,6 +27,11 @@
 body {
 	background: var(--dark-gray);
 	height: 100vh;
+
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-text-size-adjust: none;
+	text-rendering: optimizeLegibility;
 }
 
 * {
