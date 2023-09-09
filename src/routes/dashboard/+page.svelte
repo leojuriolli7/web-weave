@@ -22,8 +22,9 @@
 
 	/**
 	 * TO-DOs:
-	 * 1. Finish homepage
-	 * 2. Custom colors/styling
+	 * 1. Ordering
+	 * 2. Finish homepage
+	 * 3. Custom colors/styling
 	 */
 </script>
 

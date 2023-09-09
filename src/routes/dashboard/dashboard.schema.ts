@@ -6,8 +6,7 @@ const regexes = {
 	twitter: /^(https?:\/\/)?(www\.)?twitter\.com\/([a-zA-Z0-9_]+)\/?$/i,
 	instagram: /^(https?:\/\/)?(www\.)?instagram\.com\/([a-zA-Z0-9_]+)\/?$/i,
 	facebook: /^(https?:\/\/)?(www\.)?facebook\.com\/([a-zA-Z0-9_.-]+)\/?$/i,
-	youtube:
-		/^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/(channel\/|user\/|c\/)?([a-zA-Z0-9_-]+)\/?$/i,
+	youtube: /^(https?:\/\/)?(www\.)?youtube\.com\/(c\/|channel\/|user\/)?@?([a-zA-Z0-9_-]+)\/?$/i,
 	tiktok: /^(https?:\/\/)?(www\.)?tiktok\.com\/@([a-zA-Z0-9_.-]+)\/?$/i,
 	linkedin: /^(https?:\/\/)?(www\.)?linkedin\.com\/in\/([a-zA-Z0-9_-]+)\/?$/i,
 	twitch: /^(https?:\/\/)?(www\.)?twitch\.tv\/([a-zA-Z0-9_]+)\/?$/i,

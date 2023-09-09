@@ -6,7 +6,7 @@
 	$: isLoggedIn = data.session?.isLoggedIn;
 </script>
 
-<main class="main">
+<main>
 	<div class="headline">
 		<h1>Streamline your online presence in one link.</h1>
 		<p>
@@ -37,7 +37,7 @@
 
 <style lang="scss">
 	main {
-		background-color: #f283b6;
+		background-color: var(--medium-gray);
 		padding: 128px 32px;
 
 		p {
@@ -45,7 +45,7 @@
 			font-weight: 400;
 			letter-spacing: -0.02em;
 			line-height: 1.5;
-			color: #4e0250;
+			color: #ca57ce;
 			margin-top: 32px;
 			max-width: 700px;
 		}
@@ -53,7 +53,7 @@
 
 	section.secondary {
 		padding: 128px 32px;
-		background: #190e4f;
+		background: var(--dark-gray);
 
 		h2 {
 			color: #23b5d3;
