@@ -41,7 +41,7 @@
 
 	.user-link-content {
 		width: 100%;
-		background: var(--dark-gray);
+		background: var(--medium-gray);
 		border-radius: 25px;
 		border: 1px solid var(--border);
 		display: flex;

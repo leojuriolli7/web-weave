@@ -19,7 +19,9 @@
 
 		{#if data.session.isLoggedIn === true}
 			<div class="user-section">
-				<img src={user?.avatar} alt="Your avatar" />
+				<a href="/{user?.username}">
+					<img src={user?.avatar} alt="Your avatar" />
+				</a>
 
 				<a href="/dashboard">
 					<Button variant="brand">Dashboard</Button>

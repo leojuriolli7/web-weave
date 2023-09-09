@@ -13,16 +13,16 @@
 			One link to help you share everything you create, curate and sell from your Instagram, TikTok,
 			Twitter, YouTube and other social media profiles.
 		</p>
-	</div>
 
-	<a href={isLoggedIn ? '/dashboard' : '/login/github'}>
-		<Button
-			variant="brand"
-			size="large"
-			style="border-radius: 20px; margin-top: 20px; padding: 16px 32px; font-size: 18px;"
-			>{isLoggedIn ? 'Access your dashboard' : "Let's begin"}</Button
-		>
-	</a>
+		<a href={isLoggedIn ? '/dashboard' : '/login/github'}>
+			<Button
+				variant="brand"
+				size="large"
+				style="border-radius: 20px; margin-top: 64px; padding: 16px 32px; font-size: 18px;"
+				>{isLoggedIn ? 'Access your dashboard' : "Let's begin"}</Button
+			>
+		</a>
+	</div>
 </main>
 
 <section class="secondary">
@@ -39,13 +39,15 @@
 	main {
 		background-color: var(--medium-gray);
 		padding: 128px 32px;
+		text-align: center;
+		background-color: #d8aaf9;
 
 		p {
 			font-size: clamp(16px, 2vmin, 20px);
 			font-weight: 400;
 			letter-spacing: -0.02em;
 			line-height: 1.5;
-			color: #ca57ce;
+			color: #95009b;
 			margin-top: 32px;
 			max-width: 700px;
 		}
@@ -54,6 +56,10 @@
 	section.secondary {
 		padding: 128px 32px;
 		background: var(--dark-gray);
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
 
 		h2 {
 			color: #23b5d3;
@@ -77,7 +83,9 @@
 	}
 
 	.headline {
-		max-width: 675px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 	}
 
 	a {
@@ -86,8 +94,8 @@
 
 	h1 {
 		color: var(--brand);
-		font-size: clamp(32px, 8.5vmin, 88px);
+		font-size: clamp(32px, 8.5vmin, 50px);
 		letter-spacing: -0.02em;
-		text-shadow: #f92a82 2px 5px;
+		text-shadow: #f92a82 2px 3px;
 	}
 </style>

@@ -2,10 +2,10 @@
 	import { applyAction, enhance } from '$app/forms';
 	import { Button, Drawer, Field } from '$components';
 	import { invalidate } from '$app/navigation';
-	import PhonePreview from './Preview/PhonePreview.svelte';
 	import { expoInOut } from 'svelte/easing';
 	import { Plus, Trash2 } from 'lucide-svelte';
 	import { slide } from 'svelte/transition';
+	import PhonePreview from './Preview/PhonePreview.svelte';
 
 	export let data;
 
