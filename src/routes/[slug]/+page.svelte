@@ -26,20 +26,20 @@
 <div class="user-container">
 	<div class="user-header">
 		<img class="avatar" src={user.avatar} alt="{user.avatar} avatar" />
-		<h1>{user.username}</h1>
+		<h1 id="profile-name">{user.username}</h1>
 	</div>
 
 	<nav class="social-links">
 		{#each socialMediaLinks as link}
 			{#if link.url}
-				<SocialLink iconSize={28} media={link.name} href={link.url} />
+				<SocialLink name={user.username} iconSize={28} media={link.name} href={link.url} />
 			{/if}
 		{/each}
 	</nav>
 
 	<nav class="extra-links">
 		{#each user.links as link (link.id)}
-			<Link href={link.url}>
+			<Link href={link.url} ariaDescribedBy="profile-name">
 				{link.title}
 			</Link>
 		{/each}

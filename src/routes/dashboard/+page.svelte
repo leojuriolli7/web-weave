@@ -161,6 +161,7 @@
 									variant="danger"
 									size="base"
 									style="position: absolute; top: -10px; right: 10px;"
+									title="Delete this link"
 									on:click={() => {
 										profile.links = profile.links.filter((value) => value.id !== link.id);
 									}}
@@ -237,9 +238,9 @@
 		</main>
 
 		<!-- Desktop preview -->
-		<div class="right-side">
+		<section class="right-side">
 			<PhonePreview user={data.user} {profile} />
-		</div>
+		</section>
 	</div>
 </div>
 
@@ -272,7 +273,7 @@
 		gap: 32px;
 		justify-content: center;
 	}
-	section {
+	section:not(.right-side) {
 		border: 1px solid var(--border);
 		border-radius: 12px;
 		padding: 24px;

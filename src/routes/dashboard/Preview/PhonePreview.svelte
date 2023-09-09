@@ -38,14 +38,14 @@
 	<div class="phone-preview">
 		<img src={user.avatar} alt="Your profile avatar" />
 
-		<h3>{user.username}</h3>
+		<h3 id="profile-name">{user.username}</h3>
 
 		<p class="preview-description">{profile.description}</p>
 
 		<nav class="social-links">
 			{#each socialMediaLinks as link}
 				{#if link.url}
-					<SocialLink media={link.name} href={link.url} />
+					<SocialLink name={user.username} media={link.name} href={link.url} />
 				{/if}
 			{/each}
 		</nav>
@@ -53,8 +53,11 @@
 		<nav class="extra-links">
 			{#each profile.links as link (link.id)}
 				{#if link.title}
-					<Link style="background-color: var(--dark-gray)" variant="small" href={link.url}
-						>{link.title}</Link
+					<Link
+						style="background-color: var(--dark-gray)"
+						variant="small"
+						href={link.url}
+						ariaDescribedBy="profile-name">{link.title}</Link
 					>
 				{/if}
 			{/each}

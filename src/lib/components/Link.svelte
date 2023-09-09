@@ -6,6 +6,7 @@
 	export let href: string;
 	export let variant: 'small' | 'base' = 'base';
 	export let style: string | null = null;
+	export let ariaDescribedBy: string | null = null;
 </script>
 
 <a
@@ -13,6 +14,8 @@
 	class="user-link"
 	href={prependHttps(href)}
 	target="_blank"
+	rel="noopener"
+	aria-describedby={ariaDescribedBy}
 >
 	<div {style} class="user-link-content {variant}">
 		<slot />

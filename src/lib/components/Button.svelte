@@ -9,11 +9,11 @@
 	export let disabled: boolean | undefined = undefined;
 	export let loading: boolean | undefined = undefined;
 	export let style: string | undefined = undefined;
-
 	export let type: HTMLButtonAttributes['type'] = 'button';
 	export let variant: Variant = 'primary';
 	export let size: Size = 'base';
 	export let tabindex: number | undefined = undefined;
+	export let title: string | undefined = undefined;
 
 	const spinnerColors: Record<Variant, string> = {
 		brand: 'var(--white)',
@@ -32,6 +32,7 @@
 	on:click
 	{disabled}
 	{type}
+	{title}
 >
 	{#if loading}
 		<Spinner size={16} color={spinnerColors[variant]} />
