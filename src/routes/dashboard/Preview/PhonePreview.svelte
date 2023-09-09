@@ -84,7 +84,7 @@
 			height: 77dvh;
 			aspect-ratio: 9/16;
 			margin-top: 0px;
-			max-width: 85vw;
+			max-width: min(335px, 85vw);
 		}
 
 		.notch {
@@ -150,6 +150,14 @@
 				width: 64px;
 				height: 64px;
 				margin-top: 32px;
+			}
+
+			@media (max-width: 650px) {
+				padding: 24px;
+			}
+
+			@media (max-width: 330px) {
+				padding: 16px;
 			}
 
 			h3 {
