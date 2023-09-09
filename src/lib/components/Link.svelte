@@ -24,6 +24,7 @@
 		color: var(--white);
 		text-decoration: none;
 		width: 100%;
+		word-break: break-word;
 	}
 
 	.base {

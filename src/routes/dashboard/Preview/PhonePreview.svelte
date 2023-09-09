@@ -135,6 +135,8 @@
 			flex-direction: column;
 			align-items: center;
 			user-select: none;
+			height: 100%;
+			overflow-y: auto;
 
 			img {
 				border-radius: 50%;
