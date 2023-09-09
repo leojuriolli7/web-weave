@@ -53,7 +53,9 @@
 		<nav class="extra-links">
 			{#each profile.links as link (link.id)}
 				{#if link.title}
-					<Link variant="small" href={link.url}>{link.title}</Link>
+					<Link style="background-color: var(--dark-gray)" variant="small" href={link.url}
+						>{link.title}</Link
+					>
 				{/if}
 			{/each}
 		</nav>

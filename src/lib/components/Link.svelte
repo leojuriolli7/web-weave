@@ -5,6 +5,7 @@
 
 	export let href: string;
 	export let variant: 'small' | 'base' = 'base';
+	export let style: string | null = null;
 </script>
 
 <a
@@ -13,7 +14,7 @@
 	href={prependHttps(href)}
 	target="_blank"
 >
-	<div class="user-link-content {variant}">
+	<div {style} class="user-link-content {variant}">
 		<slot />
 	</div>
 </a>

@@ -13,6 +13,7 @@
 	export let type: HTMLButtonAttributes['type'] = 'button';
 	export let variant: Variant = 'primary';
 	export let size: Size = 'base';
+	export let tabindex: number | undefined = undefined;
 
 	const spinnerColors: Record<Variant, string> = {
 		brand: 'var(--white)',
@@ -22,7 +23,16 @@
 	};
 </script>
 
-<button class="{variant} {size}" {style} class:full class:loading on:click {disabled} {type}>
+<button
+	{tabindex}
+	class="{variant} {size}"
+	{style}
+	class:full
+	class:loading
+	on:click
+	{disabled}
+	{type}
+>
 	{#if loading}
 		<Spinner size={16} color={spinnerColors[variant]} />
 	{/if}

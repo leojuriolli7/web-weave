@@ -14,11 +14,12 @@
 			Twitter, YouTube and other social media profiles.
 		</p>
 
-		<a href={isLoggedIn ? '/dashboard' : '/login/github'}>
+		<a href={isLoggedIn ? '/dashboard' : '/login/github'} style:margin-top="64px">
 			<Button
+				tabindex={-1}
 				variant="brand"
 				size="large"
-				style="border-radius: 20px; margin-top: 64px; padding: 16px 32px; font-size: 18px;"
+				style="border-radius: 20px; padding: 16px 32px; font-size: 18px;"
 				>{isLoggedIn ? 'Access your dashboard' : "Let's begin"}</Button
 			>
 		</a>
