@@ -22,9 +22,10 @@
 
 	/**
 	 * TO-DOs:
-	 * 1. Ordering
-	 * 2. Finish homepage
-	 * 3. Custom colors/styling
+	 * - Ordering
+	 * - Custom colors/styling
+	 * - Select link icons
+	 * - Image uploads (avatar, background and link icons)
 	 */
 </script>
 
