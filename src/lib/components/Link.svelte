@@ -11,6 +11,7 @@
 	transition:slide={{ easing: cubicInOut, duration: 250 }}
 	class="user-link"
 	href={prependHttps(href)}
+	target="_blank"
 >
 	<div class="user-link-content {variant}">
 		<slot />

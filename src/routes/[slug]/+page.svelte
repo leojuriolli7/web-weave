@@ -53,6 +53,7 @@
 		height: 100%;
 		width: 100%;
 		max-width: 680px;
+		padding: 16px;
 	}
 
 	.user-header {
