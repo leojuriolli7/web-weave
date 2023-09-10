@@ -123,7 +123,7 @@
 								on:input={(e) => {
 									$colorsStore.buttonBorderSize = `${e.currentTarget.value}px`;
 								}}
-								value={$colorsStore.buttonBorderSize}
+								value={$colorsStore.buttonBorderSize.split('px')[0]}
 							/>
 							Button border size
 						</label>

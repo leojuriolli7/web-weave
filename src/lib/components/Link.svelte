@@ -22,7 +22,8 @@
 	<div
 		{style}
 		style:background-color={$colorsStore.buttonsBackgroundColor}
-		style:outline="{$colorsStore.buttonBorderSize} solid {$colorsStore.buttonsBorderColor}"
+		style:box-shadow="0 0 0 {$colorsStore.buttonBorderSize}
+		{$colorsStore.buttonsBorderColor}"
 		class="user-link-content {variant}"
 	>
 		<slot />
@@ -60,7 +61,7 @@
 		transition: all cubic-bezier(0.19, 1, 0.22, 1) 300ms;
 
 		&:hover {
-			box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+			opacity: 0.8;
 		}
 	}
 </style>
