@@ -6,10 +6,10 @@ Make your profile yours by linking all your social media profiles, adding extra 
 
 ## Tech Stach
 
-- Svelte and SvelteKit
-- Drizzle ORM and Turso DB
-- Github sign in with Lucia Auth
-- Zod for form validation
+- [Svelte](https://svelte.dev/) and [SvelteKit](https://kit.svelte.dev/)
+- [Drizzle ORM](https://orm.drizzle.team/) and [Turso DB](https://turso.tech/)
+- Github sign in with [Lucia Auth](https://lucia-auth.com/)
+- [Zod](https://zod.dev/) for form validation
 
 ## Demo: Customizing your profile
 
