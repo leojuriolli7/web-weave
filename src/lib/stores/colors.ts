@@ -10,6 +10,7 @@ export type AllowedColors = {
 	backgroundColor: string;
 	buttonTextColor: string;
 	buttonBorderSize: string;
+	firstTime: boolean;
 };
 
 export const colorsStore = writable<AllowedColors>({
@@ -20,7 +21,8 @@ export const colorsStore = writable<AllowedColors>({
 	usernameColor: '#f8fafc',
 	backgroundColor: '#222222',
 	buttonTextColor: '#ffffff',
-	buttonBorderSize: '1px'
+	buttonBorderSize: '1px',
+	firstTime: true
 });
 
 export function getColorsFromUser(user: User) {
@@ -32,6 +34,7 @@ export function getColorsFromUser(user: User) {
 		buttonTextColor: user.buttonTextColor,
 		descriptionColor: user.descriptionColor,
 		iconsColor: user.iconsColor,
-		usernameColor: user.usernameColor
+		usernameColor: user.usernameColor,
+		firstTime: false
 	};
 }

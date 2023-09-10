@@ -22,7 +22,7 @@
 		easing: expoInOut
 	};
 
-	$: $colorsStore = getColorsFromUser(profile);
+	$: if ($colorsStore && $colorsStore.firstTime) $colorsStore = getColorsFromUser(profile);
 
 	/**
 	 * TO-DOs:
