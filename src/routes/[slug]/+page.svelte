@@ -26,6 +26,11 @@
 	] as LinkType[];
 </script>
 
+<svelte:head>
+	<title>Web Weave | {user.username}</title>
+	<meta name="description" content={user.description || `${user.username}'s profile`} />
+</svelte:head>
+
 <div class="bg" style:background-color={$colorsStore.backgroundColor} />
 <div class="user-container">
 	<div class="user-header">
@@ -67,13 +72,20 @@
 	}
 	.user-container {
 		margin: 0 auto;
-		margin-top: 32px;
 		height: 100%;
 		width: 100%;
 		max-width: 680px;
-		padding: 16px;
+		padding: 32px 16px 16px 16px;
 		position: relative;
 		z-index: 2;
+
+		@media (max-width: 700px) {
+			padding: 24px;
+		}
+
+		@media (max-width: 330px) {
+			padding: 16px;
+		}
 	}
 
 	.user-header {

@@ -27,11 +27,15 @@
 	/**
 	 * TO-DOs:
 	 * - Ordering
-	 * - Custom colors/styling
+	 * - Custom box-shadows
 	 * - Select link icons
 	 * - Image uploads (avatar, background and link icons)
 	 */
 </script>
+
+<svelte:head>
+	<title>Web Weave | Dashboard</title>
+</svelte:head>
 
 <div class="outer">
 	<h1>Your Dashboard</h1>
