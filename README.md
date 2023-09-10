@@ -4,6 +4,8 @@ Streamline your online presence in one link.
 
 Make your profile yours by linking all your social media profiles, adding extra links and customizing the style of your page.
 
+Deployed to Vercel: https://web-weave.vercel.app/
+
 ## Tech Stach
 
 - [Svelte](https://svelte.dev/) and [SvelteKit](https://kit.svelte.dev/)
