@@ -1,38 +1,19 @@
-# create-svelte
+# Web Weave
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+Streamline your online presence in one link.
 
-## Creating a project
+Make your profile yours by linking all your social media profiles, adding extra links and customizing the style of your page.
 
-If you're seeing this, you've probably already done this step. Congrats!
+Deployed to Vercel: https://web-weave.vercel.app/
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+## Tech Stach
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+- [Svelte](https://svelte.dev/) and [SvelteKit](https://kit.svelte.dev/)
+- [Drizzle ORM](https://orm.drizzle.team/) and [Turso DB](https://turso.tech/)
+- Github sign in with [Lucia Auth](https://lucia-auth.com/)
+- [Zod](https://zod.dev/) for form validation
 
-## Developing
+## Demo: Customizing your profile
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+https://github.com/leojuriolli7/web-weave/assets/100495707/77460a76-f106-482b-ae43-f47d9e6a44fd
 
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
