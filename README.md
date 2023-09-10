@@ -15,5 +15,8 @@ Deployed to Vercel: https://web-weave.vercel.app/
 
 ## Demo: Customizing your profile
 
-https://github.com/leojuriolli7/web-weave/assets/100495707/77460a76-f106-482b-ae43-f47d9e6a44fd
+
+
+https://github.com/leojuriolli7/web-weave/assets/100495707/90bb83bd-c3d8-4515-aa36-d21d3ea0d175
+
 
