@@ -2,6 +2,7 @@
 	import Link from '$components/Link.svelte';
 	import type { IconNames } from '$components/MediaIcon/MediaIcon.svelte';
 	import SocialLink from '$components/SocialLink.svelte';
+	import { colorsStore, getColorsFromUser } from '$lib/stores/colors';
 
 	type LinkType = {
 		name: IconNames;
@@ -10,6 +11,8 @@
 
 	export let data;
 	let { user } = data;
+
+	$: $colorsStore = getColorsFromUser(user);
 
 	$: socialMediaLinks = [
 		{ name: 'Instagram', url: user.instagram },
@@ -23,10 +26,13 @@
 	] as LinkType[];
 </script>
 
+<div class="bg" style:background-color={$colorsStore.backgroundColor} />
 <div class="user-container">
 	<div class="user-header">
 		<img class="avatar" src={user.avatar} alt="{user.avatar} avatar" />
-		<h1 id="profile-name">{user.username}</h1>
+		<h1 style:color={$colorsStore.usernameColor} id="profile-name">{user.username}</h1>
+
+		<p style:color={$colorsStore.descriptionColor}>{user.description}</p>
 	</div>
 
 	<nav class="social-links">
@@ -37,7 +43,11 @@
 		{/each}
 	</nav>
 
-	<nav class="extra-links">
+	<nav
+		class="extra-links"
+		style:gap="calc(2 * {$colorsStore.buttonBorderSize} + 12px)"
+		style:margin-top="calc(2 * {$colorsStore.buttonBorderSize} + 22px)"
+	>
 		{#each user.links as link (link.id)}
 			<Link href={link.url} ariaDescribedBy="profile-name">
 				{link.title}
@@ -47,6 +57,14 @@
 </div>
 
 <style lang="scss">
+	div.bg {
+		width: 100vw;
+		height: 100%;
+		position: absolute;
+		top: 0;
+		right: 0;
+		z-index: 1;
+	}
 	.user-container {
 		margin: 0 auto;
 		margin-top: 32px;
@@ -54,6 +72,8 @@
 		width: 100%;
 		max-width: 680px;
 		padding: 16px;
+		position: relative;
+		z-index: 2;
 	}
 
 	.user-header {
@@ -64,7 +84,6 @@
 
 		h1 {
 			font-size: 20px;
-			color: var(--white);
 		}
 	}
 
@@ -86,8 +105,6 @@
 	.extra-links {
 		display: flex;
 		flex-direction: column;
-		gap: 12px;
 		width: 100%;
-		margin-top: 22px;
 	}
 </style>

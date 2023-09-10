@@ -18,7 +18,15 @@ export const users = sqliteTable('auth_user', {
 	linkedin: text('linkedin_url'),
 	tiktok: text('tiktok_url'),
 	twitch: text('twitch_url'),
-	telegram: text('telegram_url')
+	telegram: text('telegram_url'),
+	buttonsBackgroundColor: text('buttons_background').default('#151515').notNull(),
+	buttonsBorderColor: text('buttons_border').default('#00000015').notNull(),
+	iconsColor: text('icons_color').default('#8075ff').notNull(),
+	descriptionColor: text('description_color').default('#b3b6b7').notNull(),
+	usernameColor: text('username_color').default('#f8fafc').notNull(),
+	backgroundColor: text('background_color').default('#222222').notNull(),
+	buttonTextColor: text('button_text_color').default('#ffffff').notNull(),
+	buttonBorderSize: text('button_border_size').default('1px').notNull()
 });
 
 export const usersRelations = relations(users, ({ many }) => ({

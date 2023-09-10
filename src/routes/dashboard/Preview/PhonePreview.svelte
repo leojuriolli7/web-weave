@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { IconNames } from '$components/MediaIcon/MediaIcon.svelte';
 	import type { UpdateProfileInput } from '../dashboard.schema';
+	import { colorsStore } from '$lib/stores/colors';
 	import SocialLink from '$components/SocialLink.svelte';
 	import Link from '$components/Link.svelte';
 
@@ -29,7 +30,7 @@
 	] as LinkType[];
 </script>
 
-<div class="phone">
+<div class="phone" style:background-color={$colorsStore.backgroundColor}>
 	<div class="notch" />
 	<div class="volume-up" />
 	<div class="volume-down" />
@@ -38,9 +39,11 @@
 	<div class="phone-preview">
 		<img src={user.avatar} alt="Your profile avatar" />
 
-		<h3 id="profile-name">{user.username}</h3>
+		<h3 id="profile-name" style:color={$colorsStore.usernameColor}>{user.username}</h3>
 
-		<p class="preview-description">{profile.description}</p>
+		<p class="preview-description" style:color={$colorsStore.descriptionColor}>
+			{profile.description}
+		</p>
 
 		<nav class="social-links">
 			{#each socialMediaLinks as link}
@@ -50,7 +53,11 @@
 			{/each}
 		</nav>
 
-		<nav class="extra-links">
+		<nav
+			class="extra-links"
+			style:gap="calc(2 * {$colorsStore.buttonBorderSize} + 12px)"
+			style:margin-top="calc(2 * {$colorsStore.buttonBorderSize} + 16px)"
+		>
 			{#each profile.links as link (link.id)}
 				{#if link.title}
 					<Link
@@ -75,14 +82,13 @@
 		border-radius: 2.5rem;
 		border: 14px solid var(--night);
 		box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-		background: var(--medium-gray);
 
 		@media (max-width: 975px) {
 			width: 280px;
 			height: 550px;
 		}
 
-		@media (max-width: 650px) {
+		@media (max-width: 700px) {
 			width: auto;
 			height: 77dvh;
 			aspect-ratio: 9/16;
@@ -155,7 +161,7 @@
 				margin-top: 32px;
 			}
 
-			@media (max-width: 650px) {
+			@media (max-width: 700px) {
 				padding: 24px;
 			}
 
@@ -165,7 +171,6 @@
 
 			h3 {
 				margin-top: 16px;
-				color: var(--white);
 			}
 
 			.preview-description {
@@ -174,7 +179,6 @@
 				word-break: break-word;
 				line-height: 20px;
 				text-align: center;
-				color: var(--silver);
 			}
 		}
 	}
@@ -191,8 +195,6 @@
 	.extra-links {
 		display: flex;
 		flex-direction: column;
-		gap: 12px;
 		width: 100%;
-		margin-top: 18px;
 	}
 </style>

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { prependHttps } from '$lib/utils/prependHttps';
 	import { cubicInOut } from 'svelte/easing';
+	import { colorsStore } from '$lib/stores/colors';
 	import { slide } from 'svelte/transition';
 
 	export let href: string;
@@ -16,15 +17,20 @@
 	target="_blank"
 	rel="noopener"
 	aria-describedby={ariaDescribedBy}
+	style:color={$colorsStore.buttonTextColor}
 >
-	<div {style} class="user-link-content {variant}">
+	<div
+		{style}
+		style:background-color={$colorsStore.buttonsBackgroundColor}
+		style:outline="{$colorsStore.buttonBorderSize} solid {$colorsStore.buttonsBorderColor}"
+		class="user-link-content {variant}"
+	>
 		<slot />
 	</div>
 </a>
 
 <style lang="scss">
 	.user-link {
-		color: var(--white);
 		text-decoration: none;
 		width: 100%;
 		word-break: break-word;
@@ -33,7 +39,7 @@
 	.base {
 		padding: 12px 44px;
 
-		@media (max-width: 650px) {
+		@media (max-width: 700px) {
 			padding: 12px 24px;
 		}
 	}
@@ -46,9 +52,7 @@
 
 	.user-link-content {
 		width: 100%;
-		background: var(--medium-gray);
 		border-radius: 25px;
-		border: 1px solid var(--border);
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
@@ -56,7 +60,6 @@
 		transition: all cubic-bezier(0.19, 1, 0.22, 1) 300ms;
 
 		&:hover {
-			border-color: var(--brand-muted);
 			box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 		}
 	}

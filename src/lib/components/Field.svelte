@@ -128,7 +128,7 @@
 			color: var(--white);
 			resize: vertical;
 
-			@media (max-width: 650px) {
+			@media (max-width: 700px) {
 				font-size: 16px;
 			}
 

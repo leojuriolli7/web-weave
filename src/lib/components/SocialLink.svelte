@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { prependHttps } from '$lib/utils/prependHttps';
 	import { slide } from 'svelte/transition';
+	import { colorsStore } from '$lib/stores/colors';
 	import { cubicInOut } from 'svelte/easing';
 	import MediaIcon, { type IconNames } from '$components/MediaIcon/MediaIcon.svelte';
 
@@ -17,5 +18,5 @@
 	rel="noopener"
 	aria-label="@{name} {media}"
 >
-	<MediaIcon size={iconSize} {media} color="var(--brand-muted)" />
+	<MediaIcon size={iconSize} {media} color={$colorsStore.iconsColor} />
 </a>

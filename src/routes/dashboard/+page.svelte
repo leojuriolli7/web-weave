@@ -6,6 +6,8 @@
 	import { Plus, Trash2 } from 'lucide-svelte';
 	import { slide } from 'svelte/transition';
 	import PhonePreview from './Preview/PhonePreview.svelte';
+	import ColorField from '$components/ColorField/ColorField.svelte';
+	import { colorsStore, getColorsFromUser } from '$lib/stores/colors';
 
 	export let data;
 
@@ -19,6 +21,8 @@
 		duration: 400,
 		easing: expoInOut
 	};
+
+	$: $colorsStore = getColorsFromUser(profile);
 
 	/**
 	 * TO-DOs:
@@ -75,6 +79,50 @@
 							maxLength={200}
 							bind:value={profile.description}
 						/>
+					</div>
+				</section>
+
+				<section>
+					<h2>Colors & Appearance</h2>
+					<p>Customize the appearance of your page.</p>
+					<div class="fields fields-grid space-y">
+						<ColorField value={$colorsStore.usernameColor} key="usernameColor">
+							Username Color
+						</ColorField>
+						<ColorField value={$colorsStore.descriptionColor} key="descriptionColor">
+							Description Color
+						</ColorField>
+						<ColorField value={$colorsStore.backgroundColor} key="backgroundColor">
+							Background Color
+						</ColorField>
+						<ColorField value={$colorsStore.buttonsBackgroundColor} key="buttonsBackgroundColor">
+							Button Background Color
+						</ColorField>
+						<ColorField value={$colorsStore.buttonsBorderColor} key="buttonsBorderColor">
+							Button Border Color
+						</ColorField>
+						<ColorField value={$colorsStore.buttonTextColor} key="buttonTextColor">
+							Button Text Color
+						</ColorField>
+						<ColorField value={$colorsStore.iconsColor} key="iconsColor">
+							Social Icons Color
+						</ColorField>
+					</div>
+
+					<div class="button-border-input">
+						<label>
+							<input
+								type="range"
+								name="buttonBorderSize"
+								min={0}
+								max={10}
+								on:input={(e) => {
+									$colorsStore.buttonBorderSize = `${e.currentTarget.value}px`;
+								}}
+								value={$colorsStore.buttonBorderSize}
+							/>
+							Button border size
+						</label>
 					</div>
 				</section>
 
@@ -259,12 +307,12 @@
 		h1 {
 			color: var(--white);
 
-			@media (max-width: 650px) {
+			@media (max-width: 700px) {
 				margin-top: 32px;
 			}
 		}
 
-		@media (max-width: 650px) {
+		@media (max-width: 700px) {
 			padding: 0 16px 30px 16px;
 		}
 	}
@@ -280,7 +328,7 @@
 		padding: 24px;
 		width: 100%;
 
-		@media (max-width: 650px) {
+		@media (max-width: 700px) {
 			padding: 16px;
 		}
 
@@ -329,7 +377,7 @@
 		@media (max-width: 975px) {
 			flex: 20%;
 		}
-		@media (max-width: 650px) {
+		@media (max-width: 700px) {
 			display: none;
 		}
 	}
@@ -346,7 +394,7 @@
 		:global(button:first-child) {
 			display: none;
 
-			@media (max-width: 650px) {
+			@media (max-width: 700px) {
 				display: flex;
 			}
 		}
@@ -367,5 +415,21 @@
 		border-radius: 12px;
 		border: 1px solid var(--border);
 		position: relative;
+	}
+
+	.button-border-input {
+		margin-top: 16px;
+		label {
+			display: flex;
+			align-items: center;
+			gap: 6px;
+
+			color: var(--silver);
+		}
+
+		input {
+			padding: 0;
+			accent-color: var(--brand-muted);
+		}
 	}
 </style>

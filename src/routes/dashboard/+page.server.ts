@@ -148,10 +148,11 @@ export const actions = {
 			return fail(400, { error: true, errors });
 		}
 
-		const { links, ...userInfoAndSocialLinks } = input.data;
+		const { links, buttonBorderSize, ...userInfoAndSocialLinks } = input.data;
 
 		const updateUserPromise = tursoClient.update(usersTable).set({
-			...userInfoAndSocialLinks
+			...userInfoAndSocialLinks,
+			buttonBorderSize: `${buttonBorderSize}px`
 		});
 
 		// after here, we deal with extra links:

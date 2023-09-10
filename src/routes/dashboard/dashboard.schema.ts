@@ -47,6 +47,14 @@ export const updateProfileSchema = z.object({
 	tiktok: getSocialSchema(regexes.tiktok, 'Tiktok'),
 	twitch: getSocialSchema(regexes.twitch, 'Twitch'),
 	telegram: getSocialSchema(regexes.telegram, 'Telegram'),
+	buttonsBackgroundColor: requiredString,
+	buttonsBorderColor: requiredString,
+	iconsColor: requiredString,
+	descriptionColor: requiredString,
+	usernameColor: requiredString,
+	backgroundColor: requiredString,
+	buttonTextColor: requiredString,
+	buttonBorderSize: requiredString,
 	links: z
 		.object({
 			title: requiredString.min(5, 'Minimum of 5').max(50, 'Maximum of 50'),
