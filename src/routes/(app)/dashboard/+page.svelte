@@ -26,10 +26,11 @@
 
 	/**
 	 * TO-DOs:
-	 * - Ordering
-	 * - Custom box-shadows
+	 * - Linear gradient background
+	 * - Custom hover effects and box-shadows configuration
 	 * - Select link icons
 	 * - Image uploads (avatar, background and link icons)
+	 * - Ordering
 	 */
 </script>
 
