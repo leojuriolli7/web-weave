@@ -65,7 +65,7 @@
 	div.bg {
 		width: 100vw;
 		height: 100%;
-		position: absolute;
+		position: fixed;
 		top: 0;
 		right: 0;
 		z-index: 1;
@@ -75,16 +75,18 @@
 		height: 100%;
 		width: 100%;
 		max-width: 680px;
-		padding: 32px 16px 16px 16px;
+		padding: 48px 16px 16px 16px;
 		position: relative;
 		z-index: 2;
 
 		@media (max-width: 700px) {
 			padding: 24px;
+			padding-top: 48px;
 		}
 
 		@media (max-width: 330px) {
 			padding: 16px;
+			padding-top: 48px;
 		}
 	}
 
