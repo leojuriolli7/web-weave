@@ -26,7 +26,8 @@
 
 	/**
 	 * TO-DOs:
-	 * - Before unload, only render update button when fields are dirty
+	 * - Customize font weights
+	 * - Warn before unload, only render update button when fields are dirty
 	 * - Linear gradient background
 	 * - Custom hover effects and box-shadows configuration
 	 * - Select link icons
