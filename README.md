@@ -6,7 +6,7 @@ Make your profile yours by linking all your social media profiles, adding extra 
 
 Deployed to Vercel: https://web-weave.vercel.app/
 
-## Tech Stach
+## Tech Stack
 
 - [Svelte](https://svelte.dev/) and [SvelteKit](https://kit.svelte.dev/)
 - [Drizzle ORM](https://orm.drizzle.team/) and [Turso DB](https://turso.tech/)
