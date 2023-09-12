@@ -148,17 +148,27 @@
 
 						<div class="radio-group">
 							<label>
-								<input name="gradient" type="radio" bind:group={profile.gradient} value={false} />
+								<input
+									name="gradient"
+									type="radio"
+									bind:group={$colorsStore.gradient}
+									value={false}
+								/>
 								Color
 							</label>
 							<label>
-								<input name="gradient" type="radio" bind:group={profile.gradient} value={true} />
+								<input
+									name="gradient"
+									type="radio"
+									bind:group={$colorsStore.gradient}
+									value={true}
+								/>
 								Gradient
 							</label>
 						</div>
 
 						<div class="background-select">
-							{#if profile.gradient === true}
+							{#if $colorsStore.gradient === true}
 								<GradientSelect />
 							{:else}
 								<ColorInput value={$colorsStore.backgroundColor} key="backgroundColor">
