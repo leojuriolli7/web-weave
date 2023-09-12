@@ -36,6 +36,9 @@
 		margin: 3px 0 0 0;
 		appearance: none;
 		color: var(--silver);
+		cursor: pointer;
+		width: 100%;
+		transition: all cubic-bezier(0.215, 0.61, 0.355, 1) 0.3s;
 
 		background-image: linear-gradient(45deg, transparent 50%, var(--silver) 50%),
 			linear-gradient(135deg, var(--silver) 50%, transparent 50%),
@@ -44,5 +47,9 @@
 			calc(100% - 2.5em) 0.5em;
 		background-size: 5px 5px, 5px 5px, 1px 1.5em;
 		background-repeat: no-repeat;
+
+		&:hover {
+			opacity: 0.8;
+		}
 	}
 </style>

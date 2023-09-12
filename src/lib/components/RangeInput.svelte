@@ -2,19 +2,19 @@
 	export let value: number | string;
 	export let min: number = 0;
 	export let max: number;
-  export let name: string;
+	export let name: string;
+	export let style: string | undefined = undefined;
 </script>
 
-<div>
+<div {style}>
 	<label>
-		<input type="range" name={name} {min} {max} on:input bind:value />
+		<input type="range" {name} {min} {max} on:input bind:value />
 		<slot />
 	</label>
 </div>
 
 <style lang="scss">
 	div {
-		margin-top: 16px;
 		label {
 			display: flex;
 			align-items: center;

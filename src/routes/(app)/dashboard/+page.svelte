@@ -124,12 +124,13 @@
 						name="buttonFontWeight"
 						bind:value={$colorsStore.buttonFontWeight}
 						options={['300', '400', '500', '600', '700', '800', '900']}
-						style="margin-top: 12px"
+						style="margin-top: 16px"
 					>
 						Button font weight
 					</Select>
 
 					<RangeInput
+						style="margin-top: 24px"
 						on:input={(event) => {
 							// @ts-ignore - typescript type is wrong
 							if (event.target) $colorsStore.buttonBorderSize = `${event.target.value}px`;
