@@ -16,6 +16,10 @@
 	--success: #1db954;
 }
 
+input {
+	accent-color: var(--brand-muted);
+}
+
 .space-y > * {
 	margin-top: 16px;
 }

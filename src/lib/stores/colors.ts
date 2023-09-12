@@ -10,6 +10,11 @@ export type AllowedColors = {
 	backgroundColor: string;
 	buttonTextColor: string;
 	buttonBorderSize: string;
+
+	gradientColors: string[];
+	gradientDegrees: number;
+	gradient: boolean;
+
 	firstTime: boolean;
 };
 
@@ -22,6 +27,9 @@ export const colorsStore = writable<AllowedColors>({
 	backgroundColor: '#222222',
 	buttonTextColor: '#ffffff',
 	buttonBorderSize: '1px',
+	gradientColors: ['#fff989', '#89d9ff'],
+	gradientDegrees: 45,
+	gradient: false,
 	firstTime: true
 });
 
@@ -35,6 +43,9 @@ export function getColorsFromUser(user: User) {
 		descriptionColor: user.descriptionColor,
 		iconsColor: user.iconsColor,
 		usernameColor: user.usernameColor,
+		gradientColors: [user.firstGradientColor, user.secondGradientColor],
+		gradientDegrees: user.gradientDegrees,
+		gradient: user.gradient,
 		firstTime: false
 	};
 }

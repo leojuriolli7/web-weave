@@ -26,7 +26,11 @@ export const users = sqliteTable('auth_user', {
 	usernameColor: text('username_color').default('#f8fafc').notNull(),
 	backgroundColor: text('background_color').default('#222222').notNull(),
 	buttonTextColor: text('button_text_color').default('#ffffff').notNull(),
-	buttonBorderSize: text('button_border_size').default('1px').notNull()
+	buttonBorderSize: text('button_border_size').default('1px').notNull(),
+	gradient: integer('has_gradient', { mode: 'boolean' }).default(false).notNull(),
+	firstGradientColor: text('gradient_color_1').default('#fff989').notNull(),
+	secondGradientColor: text('gradient_color_2').default('#89d9ff').notNull(),
+	gradientDegrees: integer('gradient_degrees').default(45).notNull()
 });
 
 export const usersRelations = relations(users, ({ many }) => ({
@@ -85,5 +89,3 @@ export const keys = sqliteTable('auth_key', {
 
 export type User = typeof users.$inferSelect;
 export type Link = typeof links.$inferSelect;
-
-export type UserWithLinks = User & { links: Link[] };

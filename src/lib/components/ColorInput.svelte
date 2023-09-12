@@ -1,14 +1,20 @@
 <script lang="ts">
 	import { colorsStore, type AllowedColors } from '$lib/stores/colors';
 
-	export let key: keyof AllowedColors;
+	// can only pass keys with string as values
+	type AllowedKeys = Exclude<
+		keyof AllowedColors,
+		'gradientColors' | 'gradientDegrees' | 'gradient' | 'firstTime'
+	>;
+
+	export let key: AllowedKeys;
 	export let value: string;
 
 	$: $colorsStore[key] = value;
 </script>
 
 <label>
-	<input name={key} style="padding:0" type="color" bind:value />
+	<input name={key} style="padding:0" type="color" bind:value on:input />
 	<slot />
 </label>
 

@@ -1,22 +1,24 @@
 <script lang="ts">
 	import type { IconNames } from '$components/MediaIcon/MediaIcon.svelte';
-	import type { UpdateProfileInput } from '../dashboard.schema';
 	import { colorsStore } from '$lib/stores/colors';
 	import SocialLink from '$components/SocialLink.svelte';
 	import Link from '$components/Link.svelte';
+	import type { User as UserType, Link as LinkType } from '$drizzle/schema';
 
-	type LinkType = {
+	type SocialMediaLink = {
 		name: IconNames;
 		url: string;
 	};
 
-	type User = {
-		avatar: string | null;
-		username: string | null;
+	type ExtraLink = Omit<LinkType, 'id'> & {
+		id: string;
 	};
 
-	export let user: User;
-	export let profile: UpdateProfileInput;
+	type Profile = UserType & {
+		links: ExtraLink[];
+	};
+
+	export let profile: Profile;
 
 	$: socialMediaLinks = [
 		{ name: 'Instagram', url: profile.instagram },
@@ -27,19 +29,24 @@
 		{ name: 'Twitch', url: profile.twitch },
 		{ name: 'Telegram', url: profile.telegram },
 		{ name: 'Tiktok', url: profile.tiktok }
-	] as LinkType[];
+	] as SocialMediaLink[];
 </script>
 
-<div class="phone" style:background-color={$colorsStore.backgroundColor}>
+<div
+	class="phone"
+	style:background={$colorsStore.gradient
+		? `linear-gradient(${$colorsStore.gradientDegrees}deg, ${$colorsStore.gradientColors[0]}, ${$colorsStore.gradientColors[1]})`
+		: $colorsStore.backgroundColor}
+>
 	<div class="notch" />
 	<div class="volume-up" />
 	<div class="volume-down" />
 	<div class="power-button" />
 
 	<div class="phone-preview">
-		<img src={user.avatar} alt="Your profile avatar" />
+		<img src={profile.avatar} alt="Your profile avatar" />
 
-		<h3 id="profile-name" style:color={$colorsStore.usernameColor}>{user.username}</h3>
+		<h3 id="profile-name" style:color={$colorsStore.usernameColor}>{profile.username}</h3>
 
 		<p class="preview-description" style:color={$colorsStore.descriptionColor}>
 			{profile.description}
@@ -48,7 +55,7 @@
 		<nav class="social-links">
 			{#each socialMediaLinks as link}
 				{#if link.url}
-					<SocialLink name={user.username} media={link.name} href={link.url} />
+					<SocialLink name={profile.username} media={link.name} href={link.url} />
 				{/if}
 			{/each}
 		</nav>

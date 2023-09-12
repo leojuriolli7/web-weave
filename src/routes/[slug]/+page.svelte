@@ -31,7 +31,12 @@
 	<meta name="description" content={user.description || `${user.username}'s profile`} />
 </svelte:head>
 
-<div class="bg" style:background-color={$colorsStore.backgroundColor} />
+<div
+	class="bg"
+	style:background={$colorsStore.gradient
+		? `linear-gradient(${$colorsStore.gradientDegrees}deg, ${$colorsStore.gradientColors[0]}, ${$colorsStore.gradientColors[1]})`
+		: $colorsStore.backgroundColor}
+/>
 <div class="user-container">
 	<div class="user-header">
 		<img class="avatar" src={user.avatar} alt="{user.avatar} avatar" />

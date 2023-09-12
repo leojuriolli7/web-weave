@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { applyAction, enhance } from '$app/forms';
 	import { Button, Drawer, Field } from '$components';
 	import { invalidate } from '$app/navigation';
@@ -6,8 +6,10 @@
 	import { Plus, Trash2 } from 'lucide-svelte';
 	import { slide } from 'svelte/transition';
 	import PhonePreview from './Preview/PhonePreview.svelte';
-	import ColorField from '$components/ColorField/ColorField.svelte';
+	import ColorInput from '$components/ColorInput.svelte';
 	import { colorsStore, getColorsFromUser } from '$lib/stores/colors';
+	import GradientSelect from '$components/GradientSelect.svelte';
+	import RangeInput from '$components/RangeInput.svelte';
 
 	export let data;
 
@@ -93,43 +95,63 @@
 					<h2>Colors & Appearance</h2>
 					<p>Customize the appearance of your page.</p>
 					<div class="fields fields-grid space-y">
-						<ColorField value={$colorsStore.usernameColor} key="usernameColor">
+						<ColorInput value={$colorsStore.usernameColor} key="usernameColor">
 							Username Color
-						</ColorField>
-						<ColorField value={$colorsStore.descriptionColor} key="descriptionColor">
+						</ColorInput>
+						<ColorInput value={$colorsStore.descriptionColor} key="descriptionColor">
 							Description Color
-						</ColorField>
-						<ColorField value={$colorsStore.backgroundColor} key="backgroundColor">
-							Background Color
-						</ColorField>
-						<ColorField value={$colorsStore.buttonsBackgroundColor} key="buttonsBackgroundColor">
+						</ColorInput>
+						<ColorInput value={$colorsStore.buttonsBackgroundColor} key="buttonsBackgroundColor">
 							Button Background Color
-						</ColorField>
-						<ColorField value={$colorsStore.buttonsBorderColor} key="buttonsBorderColor">
+						</ColorInput>
+						<ColorInput value={$colorsStore.buttonsBorderColor} key="buttonsBorderColor">
 							Button Border Color
-						</ColorField>
-						<ColorField value={$colorsStore.buttonTextColor} key="buttonTextColor">
+						</ColorInput>
+						<ColorInput value={$colorsStore.buttonTextColor} key="buttonTextColor">
 							Button Text Color
-						</ColorField>
-						<ColorField value={$colorsStore.iconsColor} key="iconsColor">
+						</ColorInput>
+						<ColorInput value={$colorsStore.iconsColor} key="iconsColor">
 							Social Icons Color
-						</ColorField>
+						</ColorInput>
 					</div>
 
-					<div class="button-border-input">
-						<label>
-							<input
-								type="range"
-								name="buttonBorderSize"
-								min={0}
-								max={10}
-								on:input={(e) => {
-									$colorsStore.buttonBorderSize = `${e.currentTarget.value}px`;
-								}}
-								value={$colorsStore.buttonBorderSize.split('px')[0]}
-							/>
-							Button border size
-						</label>
+					<RangeInput
+						on:input={(event) => {
+							// @ts-ignore - typescript type is wrong
+							if (event.target) $colorsStore.buttonBorderSize = `${event.target.value}px`;
+						}}
+						max={10}
+						name="buttonBorderSize"
+						value={$colorsStore.buttonBorderSize.split('px')[0]}
+					>
+						Button border size
+					</RangeInput>
+
+					<div class="background-section">
+						<h3>Background Color</h3>
+
+						<p>Choose between solid colors or gradients.</p>
+
+						<div class="radio-group">
+							<label>
+								<input name="gradient" type="radio" bind:group={profile.gradient} value={false} />
+								Color
+							</label>
+							<label>
+								<input name="gradient" type="radio" bind:group={profile.gradient} value={true} />
+								Gradient
+							</label>
+						</div>
+
+						<div class="background-select">
+							{#if profile.gradient === true}
+								<GradientSelect />
+							{:else}
+								<ColorInput value={$colorsStore.backgroundColor} key="backgroundColor">
+									Click to select your profile's background color
+								</ColorInput>
+							{/if}
+						</div>
 					</div>
 				</section>
 
@@ -288,14 +310,14 @@
 				width="100%"
 			>
 				<div class="preview-drawer-content">
-					<PhonePreview user={data.user} {profile} />
+					<PhonePreview {profile} />
 				</div>
 			</Drawer>
 		</main>
 
 		<!-- Desktop preview -->
 		<section class="right-side">
-			<PhonePreview user={data.user} {profile} />
+			<PhonePreview {profile} />
 		</section>
 	</div>
 </div>
@@ -374,6 +396,25 @@
 		}
 	}
 
+	.background-section {
+		margin-top: 24px;
+
+		h3 {
+			color: var(--brand-muted);
+		}
+
+		.radio-group {
+			display: flex;
+			gap: 12px;
+			align-items: center;
+			margin-top: 8px;
+		}
+
+		.background-select {
+			margin-top: 12px;
+		}
+	}
+
 	.left-side {
 		position: relative;
 	}
@@ -422,21 +463,5 @@
 		border-radius: 12px;
 		border: 1px solid var(--border);
 		position: relative;
-	}
-
-	.button-border-input {
-		margin-top: 16px;
-		label {
-			display: flex;
-			align-items: center;
-			gap: 6px;
-
-			color: var(--silver);
-		}
-
-		input {
-			padding: 0;
-			accent-color: var(--brand-muted);
-		}
 	}
 </style>
