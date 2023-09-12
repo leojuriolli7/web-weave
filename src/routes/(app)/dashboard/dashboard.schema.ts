@@ -60,9 +60,9 @@ export const updateProfileSchema = z
 		gradientDegrees: z.coerce.number().optional(),
 		buttonTextColor: requiredString,
 		buttonBorderSize: requiredString,
-		gradient: z.boolean({
-			coerce: true
-		}),
+
+		// html input returns a string instead of boolean...
+		gradient: z.union([z.literal('true'), z.literal('false')]),
 		links: z
 			.object({
 				title: requiredString.min(5, 'Minimum of 5').max(50, 'Maximum of 50'),
@@ -76,7 +76,7 @@ export const updateProfileSchema = z
 			{ backgroundColor, gradient, firstGradientColor, secondGradientColor, gradientDegrees },
 			ctx
 		) => {
-			if (gradient === false && !backgroundColor) {
+			if (gradient === 'false' && !backgroundColor) {
 				return ctx.addIssue({
 					code: 'custom',
 					message: 'Required',
@@ -84,7 +84,7 @@ export const updateProfileSchema = z
 				});
 			}
 
-			if (gradient === true) {
+			if (gradient === 'true') {
 				if (!firstGradientColor) {
 					ctx.addIssue({
 						code: 'custom',

@@ -148,10 +148,12 @@ export const actions = {
 			return fail(400, { error: true, errors });
 		}
 
-		const { links, buttonBorderSize, ...userInfoAndSocialLinks } = input.data;
+		const { links, buttonBorderSize, gradient, ...userInfoAndSocialLinks } = input.data;
 
 		const updateUserPromise = tursoClient.update(usersTable).set({
 			...userInfoAndSocialLinks,
+			// html input returns a string instead of boolean...
+			gradient: gradient === 'false' ? false : true,
 			buttonBorderSize: `${buttonBorderSize}px`
 		});
 
