@@ -96,7 +96,7 @@
 					</div>
 				</section>
 
-				<section>
+				<section class="colors-section">
 					<h2>Colors & Appearance</h2>
 					<p>Customize the appearance of your page.</p>
 					<div class="fields fields-grid space-y">
@@ -405,6 +405,9 @@
 		flex: 50%;
 	}
 
+	.colors-section {
+		container-type: inline-size;
+	}
 	.social-section {
 		container-type: inline-size;
 	}
