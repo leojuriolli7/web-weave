@@ -15,6 +15,7 @@
 	import { slide } from 'svelte/transition';
 	import PhonePreview from './Preview/PhonePreview.svelte';
 	import { colorsStore, getColorsFromUser } from '$lib/stores/colors';
+	import MetaTags from '$components/MetaTags.svelte';
 
 	export let data;
 
@@ -41,10 +42,10 @@
 	 */
 </script>
 
-<svelte:head>
-	<title>Web Weave | Dashboard</title>
-</svelte:head>
-
+<MetaTags
+	title="Web Weave | Dashboard"
+	description="Streamline your online presence. All your links in one place."
+/>
 <div class="outer">
 	<h1>Your Dashboard</h1>
 	<p>Here is your personal hub for customizing your account and your links.</p>

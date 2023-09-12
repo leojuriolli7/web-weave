@@ -1,11 +1,12 @@
 <script lang="ts">
+	import MetaTags from '$components/MetaTags.svelte';
 	import '../app.scss';
 </script>
 
-<svelte:head>
-	<title>Web Weave</title>
-	<meta name="description" content="Streamline your online presence." />
-</svelte:head>
+<MetaTags
+	title="Web Weave"
+	description="Streamline your online presence. All your links in one place."
+/>
 
 <div>
 	<slot />

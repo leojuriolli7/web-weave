@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Link from '$components/Link.svelte';
 	import type { IconNames } from '$components/MediaIcon/MediaIcon.svelte';
+	import MetaTags from '$components/MetaTags.svelte';
 	import SocialLink from '$components/SocialLink.svelte';
 	import { colorsStore, getColorsFromUser } from '$lib/stores/colors';
 
@@ -26,10 +27,11 @@
 	] as LinkType[];
 </script>
 
-<svelte:head>
-	<title>Web Weave | {user.username}</title>
-	<meta name="description" content={user.description || `${user.username}'s profile`} />
-</svelte:head>
+<MetaTags
+	title="Web Weave | {user.username}"
+	description={user.description || `${user.username}'s profile`}
+	image={user.avatar}
+/>
 
 <div
 	class="bg"

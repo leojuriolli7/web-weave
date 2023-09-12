@@ -54,7 +54,7 @@
 		font-size: 24px;
 		font-weight: 700;
 		letter-spacing: -0.02em;
-		color: var(--brand);
+		color: var(--brand-muted);
 	}
 
 	header {
