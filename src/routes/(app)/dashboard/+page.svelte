@@ -45,6 +45,7 @@
 <MetaTags
 	title="Web Weave | Dashboard"
 	description="Streamline your online presence. All your links in one place."
+	color="#151515"
 />
 <div class="outer">
 	<h1>Your Dashboard</h1>

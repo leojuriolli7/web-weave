@@ -10,6 +10,7 @@
 <MetaTags
 	title="Web Weave"
 	description="Streamline your online presence. All your links in one place."
+	color="#151515"
 />
 
 <main>

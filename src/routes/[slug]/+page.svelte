@@ -31,6 +31,7 @@
 	title="Web Weave | {user.username}"
 	description={user.description || `${user.username}'s profile`}
 	image={user.avatar}
+	color={user.gradient ? user.firstGradientColor : user.backgroundColor}
 />
 
 <div
