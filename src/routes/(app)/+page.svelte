@@ -1,10 +1,16 @@
 <script>
 	import Button from '$components/Button.svelte';
+	import MetaTags from '$components/MetaTags.svelte';
 
 	export let data;
 
 	$: isLoggedIn = data.session?.isLoggedIn;
 </script>
+
+<MetaTags
+	title="Web Weave"
+	description="Streamline your online presence. All your links in one place."
+/>
 
 <main>
 	<div class="headline">
