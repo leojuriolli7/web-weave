@@ -26,6 +26,7 @@ export const users = sqliteTable('auth_user', {
 	usernameColor: text('username_color').default('#f8fafc').notNull(),
 	backgroundColor: text('background_color').default('#222222').notNull(),
 	buttonTextColor: text('button_text_color').default('#ffffff').notNull(),
+	buttonFontWeight: text('button_font_weight').default('400').notNull(),
 	buttonBorderSize: text('button_border_size').default('1px').notNull(),
 	gradient: integer('has_gradient', { mode: 'boolean' }).default(false).notNull(),
 	firstGradientColor: text('gradient_color_1').default('#fff989').notNull(),

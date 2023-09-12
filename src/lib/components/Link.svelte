@@ -18,6 +18,7 @@
 	rel="noopener"
 	aria-describedby={ariaDescribedBy}
 	style:color={$colorsStore.buttonTextColor}
+	style:font-weight={$colorsStore.buttonFontWeight}
 >
 	<div
 		{style}

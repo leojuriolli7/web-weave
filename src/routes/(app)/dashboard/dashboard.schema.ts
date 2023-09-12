@@ -53,6 +53,7 @@ export const updateProfileSchema = z
 		iconsColor: requiredString,
 		descriptionColor: requiredString,
 		usernameColor: requiredString,
+		buttonFontWeight: requiredString,
 		backgroundColor: z.string().optional(),
 		firstGradientColor: z.string().optional(),
 		secondGradientColor: z.string().optional(),

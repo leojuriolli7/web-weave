@@ -3,3 +3,7 @@ export { default as Field } from './Field.svelte';
 export { default as Spinner } from './Spinner.svelte';
 export { default as Link } from './Link.svelte';
 export { default as Drawer } from './Drawer.svelte';
+export { default as Select } from './Select.svelte';
+export { default as ColorInput } from './ColorInput.svelte';
+export { default as RangeInput } from './RangeInput.svelte';
+export { default as GradientSelect } from './GradientSelect.svelte';

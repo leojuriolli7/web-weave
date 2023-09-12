@@ -1,0 +1,1 @@
+ALTER TABLE auth_user ADD `button_font_weight` text DEFAULT '400' NOT NULL;

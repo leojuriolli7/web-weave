@@ -1,15 +1,20 @@
 <script lang="ts">
 	import { applyAction, enhance } from '$app/forms';
-	import { Button, Drawer, Field } from '$components';
+	import {
+		Button,
+		Drawer,
+		Field,
+		Select,
+		ColorInput,
+		GradientSelect,
+		RangeInput
+	} from '$components';
 	import { invalidate } from '$app/navigation';
 	import { expoInOut } from 'svelte/easing';
 	import { Plus, Trash2 } from 'lucide-svelte';
 	import { slide } from 'svelte/transition';
 	import PhonePreview from './Preview/PhonePreview.svelte';
-	import ColorInput from '$components/ColorInput.svelte';
 	import { colorsStore, getColorsFromUser } from '$lib/stores/colors';
-	import GradientSelect from '$components/GradientSelect.svelte';
-	import RangeInput from '$components/RangeInput.svelte';
 
 	export let data;
 
@@ -28,9 +33,7 @@
 
 	/**
 	 * TO-DOs:
-	 * - Customize font weights
 	 * - Warn before unload, only render update button when fields are dirty
-	 * - Linear gradient background
 	 * - Custom hover effects and box-shadows configuration
 	 * - Select link icons
 	 * - Image uploads (avatar, background and link icons)
@@ -114,6 +117,15 @@
 							Social Icons Color
 						</ColorInput>
 					</div>
+
+					<Select
+						name="buttonFontWeight"
+						bind:value={$colorsStore.buttonFontWeight}
+						options={['300', '400', '500', '600', '700', '800', '900']}
+						style="margin-top: 12px"
+					>
+						Button font weight
+					</Select>
 
 					<RangeInput
 						on:input={(event) => {
@@ -407,7 +419,7 @@
 			display: flex;
 			gap: 12px;
 			align-items: center;
-			margin-top: 8px;
+			margin-top: 16px;
 		}
 
 		.background-select {

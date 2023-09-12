@@ -10,6 +10,7 @@ export type AllowedColors = {
 	backgroundColor: string;
 	buttonTextColor: string;
 	buttonBorderSize: string;
+	buttonFontWeight: string;
 
 	gradientColors: string[];
 	gradientDegrees: number;
@@ -21,6 +22,7 @@ export type AllowedColors = {
 export const colorsStore = writable<AllowedColors>({
 	buttonsBackgroundColor: '#151515',
 	buttonsBorderColor: '#00000015',
+	buttonFontWeight: '400',
 	iconsColor: '#8075ff',
 	descriptionColor: '#b3b6b7',
 	usernameColor: '#f8fafc',
@@ -41,6 +43,7 @@ export function getColorsFromUser(user: User) {
 		buttonsBorderColor: user.buttonsBorderColor,
 		buttonTextColor: user.buttonTextColor,
 		descriptionColor: user.descriptionColor,
+		buttonFontWeight: user.buttonFontWeight,
 		iconsColor: user.iconsColor,
 		usernameColor: user.usernameColor,
 		gradientColors: [user.firstGradientColor, user.secondGradientColor],
