@@ -26,6 +26,7 @@
 
 	/**
 	 * TO-DOs:
+	 * - use css variables (style tag) instead of style directive
 	 * - Warn before unload, only render update button when fields are dirty
 	 * - Custom hover effects and box-shadows configuration
 	 * - Image uploads (avatar, background and link icons)
