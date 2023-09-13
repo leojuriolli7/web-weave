@@ -1,3 +1,15 @@
+/**
+ * This file is necessary because we can't do
+ *
+ * ```ts
+ *  import * as Icons from 'lucide-svelte'
+ * ```
+ *
+ * Because this would import *all* lucide icons,
+ * which would increase bundle-size and load many
+ * unnecessary icons.
+ */
+
 import {
 	AlertCircle,
 	Activity,
