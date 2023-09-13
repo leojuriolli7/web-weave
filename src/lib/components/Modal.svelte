@@ -34,6 +34,7 @@
 					dialog.close();
 				}}
 				class="close-icon"
+				aria-label="Close this modal"
 			>
 				<CloseIcon size={18} color="var(--silver)" />
 			</button>
