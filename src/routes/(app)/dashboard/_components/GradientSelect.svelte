@@ -1,6 +1,6 @@
 <script>
 	import { colorsStore } from '$lib/stores/colors';
-	import RangeInput from './RangeInput.svelte';
+	import RangeInput from '$components/RangeInput.svelte';
 </script>
 
 <div class="outer">

@@ -1,6 +1,5 @@
 <script>
-	import Button from '$components/Button.svelte';
-	import MetaTags from '$components/MetaTags.svelte';
+	import { MetaTags, Button } from '$components';
 
 	export let data;
 

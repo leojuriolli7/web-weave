@@ -3,9 +3,11 @@
 	import { cubicInOut } from 'svelte/easing';
 	import { colorsStore } from '$lib/stores/colors';
 	import { slide } from 'svelte/transition';
+	import { icons } from './SelectIcons/icons';
 
 	export let href: string;
 	export let variant: 'small' | 'base' = 'base';
+	export let icon: string | null = null;
 	export let style: string | null = null;
 	export let ariaDescribedBy: string | null = null;
 </script>
@@ -27,6 +29,15 @@
 		{$colorsStore.buttonsBorderColor}"
 		class="user-link-content {variant}"
 	>
+		{#if icon}
+			<div class="icon">
+				<svelte:component
+					this={icons?.find((value) => value.name === icon)?.component}
+					class="icon-{variant}"
+				/>
+			</div>
+		{/if}
+
 		<slot />
 	</div>
 </a>
@@ -38,16 +49,30 @@
 		word-break: break-word;
 	}
 
+	.icon {
+		position: absolute;
+		left: 12px;
+		top: 50%;
+		transform: translateY(-50%);
+		display: flex;
+	}
+
+	:global(.icon-small) {
+		width: 18px;
+		height: 18px;
+	}
+
+	:global(.icon-base) {
+		width: 24px;
+		height: 24px;
+	}
+
 	.base {
 		padding: 12px 44px;
-
-		@media (max-width: 700px) {
-			padding: 12px 24px;
-		}
 	}
 
 	.small {
-		padding: 6px 22px;
+		padding: 6px 50px;
 
 		font-size: 15px;
 	}
@@ -57,8 +82,9 @@
 		border-radius: 25px;
 		display: flex;
 		align-items: center;
-		justify-content: space-between;
-		gap: 12px;
+		justify-content: center;
+		position: relative;
+		gap: 6px;
 		transition: all cubic-bezier(0.19, 1, 0.22, 1) 300ms;
 
 		&:hover {

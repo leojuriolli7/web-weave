@@ -1,8 +1,7 @@
 <script lang="ts">
 	import type { IconNames } from '$components/MediaIcon/MediaIcon.svelte';
 	import { colorsStore } from '$lib/stores/colors';
-	import SocialLink from '$components/SocialLink.svelte';
-	import Link from '$components/Link.svelte';
+	import { Link, SocialLink } from '$components';
 	import type { User as UserType, Link as LinkType } from '$drizzle/schema';
 
 	type SocialMediaLink = {
@@ -68,6 +67,7 @@
 			{#each profile.links as link (link.id)}
 				{#if link.title}
 					<Link
+						icon={link.image}
 						style="background-color: var(--dark-gray)"
 						variant="small"
 						href={link.url}

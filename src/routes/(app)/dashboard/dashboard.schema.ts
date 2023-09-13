@@ -67,7 +67,8 @@ export const updateProfileSchema = z
 			.object({
 				title: requiredString.min(5, 'Minimum of 5').max(50, 'Maximum of 50'),
 				url: requiredString.url('Invalid URL').min(5, 'Minimum of 5').max(100, 'Maximum of 100'),
-				id: z.union([z.string(), z.number()])
+				id: z.union([z.string(), z.number()]),
+				image: z.string().nullable()
 			})
 			.array()
 	})

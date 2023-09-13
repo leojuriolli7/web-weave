@@ -2,7 +2,7 @@
 	import type { HTMLButtonAttributes } from 'svelte/elements';
 	import Spinner from './Spinner.svelte';
 
-	type Variant = 'primary' | 'secondary' | 'danger' | 'brand';
+	type Variant = 'primary' | 'secondary' | 'tertiary' | 'danger' | 'brand';
 	type Size = 'small' | 'base' | 'large';
 
 	export let full = false;
@@ -19,7 +19,8 @@
 		brand: 'var(--white)',
 		danger: 'var(--error-text)',
 		primary: 'var(--black)',
-		secondary: 'var(--white)'
+		secondary: 'var(--white)',
+		tertiary: 'var(--white)'
 	};
 </script>
 
@@ -102,6 +103,11 @@
 
 	.secondary {
 		background: var(--medium-gray);
+		color: var(--white);
+	}
+
+	.tertiary {
+		background: var(--muted-gray);
 		color: var(--white);
 	}
 

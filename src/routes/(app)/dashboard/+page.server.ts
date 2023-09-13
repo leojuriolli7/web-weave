@@ -27,7 +27,7 @@ function mountLinks(input: Record<string, any>) {
 	const links: Record<string, string>[] = [];
 
 	for (const key in input) {
-		const isLink = key.match(/links\.(title|url)\[(.*?)\]/);
+		const isLink = key.match(/links\.(title|url|image)\[(.*?)\]/);
 
 		if (isLink) {
 			const [, property, id] = isLink;
@@ -177,7 +177,8 @@ export const actions = {
 			await tursoClient.insert(linksTable).values({
 				authorId: session.user.userId,
 				title: link.title,
-				url: link.url
+				url: link.url,
+				image: link.image || null
 			});
 		});
 
@@ -190,7 +191,8 @@ export const actions = {
 				.update(linksTable)
 				.set({
 					title: link.title,
-					url: link.url
+					url: link.url,
+					image: link.image || null
 				})
 				.where(eq(linksTable.id, Number(link.id)));
 		});

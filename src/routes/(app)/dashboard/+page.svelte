@@ -1,21 +1,13 @@
 <script lang="ts">
 	import { applyAction, enhance } from '$app/forms';
-	import {
-		Button,
-		Drawer,
-		Field,
-		Select,
-		ColorInput,
-		GradientSelect,
-		RangeInput
-	} from '$components';
+	import { Button, Drawer, Field, Select, ColorInput, RangeInput, MetaTags } from '$components';
 	import { invalidate } from '$app/navigation';
 	import { expoInOut } from 'svelte/easing';
-	import { Plus, Trash2 } from 'lucide-svelte';
-	import { slide } from 'svelte/transition';
-	import PhonePreview from './Preview/PhonePreview.svelte';
+	import { Plus } from 'lucide-svelte';
+	import PhonePreview from './_components/PhonePreview.svelte';
 	import { colorsStore, getColorsFromUser } from '$lib/stores/colors';
-	import MetaTags from '$components/MetaTags.svelte';
+	import GradientSelect from './_components/GradientSelect.svelte';
+	import UpsertLink from './_components/UpsertLink.svelte';
 
 	export let data;
 
@@ -36,7 +28,6 @@
 	 * TO-DOs:
 	 * - Warn before unload, only render update button when fields are dirty
 	 * - Custom hover effects and box-shadows configuration
-	 * - Select link icons
 	 * - Image uploads (avatar, background and link icons)
 	 * - Ordering
 	 */
@@ -258,35 +249,17 @@
 					<p>Add any extra links you might want to share.</p>
 
 					<div class="fields space-y">
-						{#each profile.links as link (link.id)}
-							<div transition:slide class="link-form">
-								<Button
-									variant="danger"
-									size="base"
-									style="position: absolute; top: -10px; right: 10px;"
-									title="Delete this link"
-									on:click={() => {
-										profile.links = profile.links.filter((value) => value.id !== link.id);
-									}}
-								>
-									<Trash2 size={18} />
-								</Button>
-								<Field
-									disabled={isLoading}
-									label="Title"
-									name="links.title[{link.id}]"
-									placeholder="Give your link a title..."
-									bind:value={link.title}
-								/>
-								<Field
-									disabled={isLoading}
-									label="URL"
-									name="links.url[{link.id}]"
-									placeholder="Type a url..."
-									style="margin-top: 16px"
-									bind:value={link.url}
-								/>
-							</div>
+						{#each profile.links as link, index (link.id)}
+							<UpsertLink
+								bind:link
+								{isLoading}
+								on:deletelink={() => {
+									profile.links = profile.links.filter((value) => value.id !== link.id);
+								}}
+								on:removeicon={() => {
+									profile.links[index].image = null;
+								}}
+							/>
 						{/each}
 
 						<Button
@@ -484,12 +457,5 @@
 		padding: 32px 16px;
 		display: flex;
 		justify-content: center;
-	}
-
-	.link-form {
-		padding: 16px;
-		border-radius: 12px;
-		border: 1px solid var(--border);
-		position: relative;
 	}
 </style>

@@ -1,8 +1,6 @@
 <script lang="ts">
-	import Link from '$components/Link.svelte';
 	import type { IconNames } from '$components/MediaIcon/MediaIcon.svelte';
-	import MetaTags from '$components/MetaTags.svelte';
-	import SocialLink from '$components/SocialLink.svelte';
+	import { SocialLink, Link, MetaTags } from '$components';
 	import { colorsStore, getColorsFromUser } from '$lib/stores/colors';
 
 	type LinkType = {
@@ -62,7 +60,7 @@
 		style:margin-top="calc(2 * {$colorsStore.buttonBorderSize} + 22px)"
 	>
 		{#each user.links as link (link.id)}
-			<Link href={link.url} ariaDescribedBy="profile-name">
+			<Link icon={link.image} href={link.url} ariaDescribedBy="profile-name">
 				{link.title}
 			</Link>
 		{/each}
