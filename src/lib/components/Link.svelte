@@ -33,6 +33,7 @@
 			<div class="icon">
 				<svelte:component
 					this={icons?.find((value) => value.name === icon)?.component}
+					color={$colorsStore.buttonTextColor}
 					class="icon-{variant}"
 				/>
 			</div>
