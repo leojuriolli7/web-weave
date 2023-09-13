@@ -53,11 +53,19 @@
 
 <style lang="scss">
 	dialog {
-		max-width: 32em;
+		max-width: min(32em, 90vw);
+		max-height: 95vh;
 		border-radius: 16px;
 		border: none;
 		margin: auto;
 		background: var(--dark-gray);
+
+		&::-webkit-scrollbar {
+			display: none;
+		}
+
+		-ms-overflow-style: none;
+		scrollbar-width: none;
 	}
 
 	dialog::backdrop {
@@ -97,7 +105,10 @@
 
 	.header {
 		position: relative;
-		padding: 16px 32px 16px 0;
+		padding-top: 16px;
+		padding-bottom: 16px;
+		padding-left: 16px;
+		padding-right: 58px;
 		border-bottom: 1px solid var(--border);
 
 		.close-icon {
@@ -128,7 +139,6 @@
 	}
 
 	.content,
-	.header,
 	.footer {
 		padding-left: 16px;
 		padding-right: 16px;

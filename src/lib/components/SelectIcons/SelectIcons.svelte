@@ -59,6 +59,10 @@
 	h3 {
 		color: var(--brand-muted);
 		font-size: 21px;
+
+		@media (max-width: 975px) {
+			font-size: 18px;
+		}
 	}
 
 	.icon:has(input:checked) {
