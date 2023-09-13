@@ -19,7 +19,7 @@
 			.content {
 				opacity: 1;
 				visibility: visible;
-				transform: translateY(33px);
+				transform: translateY(33px) scale(1);
 			}
 		}
 	}
@@ -27,7 +27,7 @@
 	.content {
 		position: absolute;
 		z-index: 2;
-		transition: 280ms all 120ms cubic-bezier(0.215, 0.61, 0.355, 1);
+		transition: 280ms all 120ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
 		top: 6px;
 		background: var(--medium-gray);
 		box-shadow: 0 0.5em 0.75em rgba(black, 0.25);
@@ -39,5 +39,6 @@
 		gap: 12px;
 		opacity: 0;
 		visibility: hidden;
+		transform: scale(0.95);
 	}
 </style>
