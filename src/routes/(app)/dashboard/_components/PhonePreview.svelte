@@ -43,7 +43,11 @@
 	<div class="power-button" />
 
 	<div class="phone-preview">
-		<img src={profile.avatar} alt="Your profile avatar" />
+		<img
+			src={profile.avatar}
+			alt="Your profile avatar"
+			style:view-transition-name="user-avatar-{profile.username}"
+		/>
 
 		<h3 id="profile-name" style:color={$colorsStore.usernameColor}>{profile.username}</h3>
 
@@ -61,6 +65,7 @@
 
 		<nav
 			class="extra-links"
+			style:view-transition-name="user-links-{profile.username}"
 			style:gap="calc(2 * {$colorsStore.buttonBorderSize} + 12px)"
 			style:margin-top="calc(2 * {$colorsStore.buttonBorderSize} + 16px)"
 		>

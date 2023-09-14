@@ -40,7 +40,12 @@
 />
 <div class="user-container">
 	<div class="user-header">
-		<img class="avatar" src={user.avatar} alt="{user.avatar} avatar" />
+		<img
+			class="avatar"
+			src={user.avatar}
+			alt="{user.avatar} avatar"
+			style:view-transition-name="user-avatar-{user.username}"
+		/>
 		<h1 style:color={$colorsStore.usernameColor} id="profile-name">{user.username}</h1>
 
 		<p style:color={$colorsStore.descriptionColor}>{user.description}</p>
@@ -56,6 +61,7 @@
 
 	<nav
 		class="extra-links"
+		style:view-transition-name="user-links-{user.username}"
 		style:gap="calc(2 * {$colorsStore.buttonBorderSize} + 12px)"
 		style:margin-top="calc(2 * {$colorsStore.buttonBorderSize} + 22px)"
 	>
