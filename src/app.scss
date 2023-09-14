@@ -64,3 +64,7 @@ h3,
 p {
 	margin: 0;
 }
+
+#nprogress .bar {
+	background: var(--brand-muted);
+}
