@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onNavigate } from '$app/navigation';
+	import '../app.scss';
 
 	onNavigate((navigation) => {
 		if (!document.startViewTransition) return;
