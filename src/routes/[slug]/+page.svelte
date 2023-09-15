@@ -38,7 +38,7 @@
 		? `linear-gradient(${$colorsStore.gradientDegrees}deg, ${$colorsStore.gradientColors[0]}, ${$colorsStore.gradientColors[1]})`
 		: $colorsStore.backgroundColor}
 />
-<div class="user-container">
+<main class="user-container">
 	<div class="user-header">
 		<img
 			class="avatar"
@@ -71,7 +71,7 @@
 			</Link>
 		{/each}
 	</nav>
-</div>
+</main>
 
 <style lang="scss">
 	div.bg {
