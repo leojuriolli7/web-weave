@@ -24,7 +24,8 @@ const getSocialSchema = (regex: RegExp, name: string) =>
 					code: 'too_small',
 					inclusive: false,
 					minimum: 5,
-					type: 'string'
+					type: 'string',
+					message: "Minimum of 5"
 				});
 			}
 
